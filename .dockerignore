@@ -1,0 +1,10 @@
+*.exe
+*.md
+*.zip
+*.tar
+*.gz
+*.log
+*.so
+binaries/
+.vscode/
+__pycache__/
