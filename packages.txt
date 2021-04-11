@@ -1,2 +1,5 @@
 chromium
+chromium-common
 chromium-driver
+chromium-sandbox
+chromium-shell
