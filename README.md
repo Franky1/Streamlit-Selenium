@@ -43,6 +43,13 @@ docker pull python:3.7.10-slim
 ```shell
 docker run -it --name py3710 python:3.7.10 /bin/bash
 docker run -it --name py3710slim python:3.7.10-slim /bin/bash
+docker run -ti --rm python:3.7.10-slim /bin/bash # testing python container
+
+docker build -t franky1/docker-streamlit-selenium:latest .
+docker run -ti -p 8080:8080 --rm franky1/docker-streamlit-selenium:latest
+docker run -ti -p 8080:8080 -v $(pwd):/app --rm franky1/docker-streamlit-selenium:latest  # linux
+docker run -ti -p 8080:8080 -v ${pwd}:/app --rm franky1/docker-streamlit-selenium:latest  # powershell
+docker run -ti -p 8080:8080 -v %cd%:/app --rm franky1/docker-streamlit-selenium:latest  # cmd.exe
 ```
 
 ### Selenium Installation
@@ -121,6 +128,10 @@ driver = webdriver.Chrome(executable_path="/usr/bin/chromedriver",options=option
 driver.get("https://www.google.com")
 ```
 
+#### Chromium Options
+
+<https://peter.sh/experiments/chromium-command-line-switches/>
+
 #### Chromium Headless
 
 ```python
@@ -142,4 +153,4 @@ driver.get("https://www.google.com")
 ## Status
 
 - WORK IN PROGRESS - not finished yet
-- Last changes: 10.04.2021
+- Last changes: 11.04.2021
