@@ -1,2 +1,2 @@
-selenium
+selenium==3.141.0
 streamlit==0.79.0
