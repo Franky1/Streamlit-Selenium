@@ -2,15 +2,13 @@
 
 Streamlit project to test Selenium running in Streamlit sharing runtime.
 
-> WORK IN PROGRESS - NOT FINISHED YET
+> WORK IN PROGRESSs  
+> Local Windows and Docker deployment works  
+> Deployment to Streamlit Sharing does NOT work
 
 ## ToDo
 
-- [ ] improve the selenium example
-- [ ] make a streamlit app
-- [ ] test streamlit app locally
-- [ ] deploy to streamlit sharing runtime
-- [ ] test streamlit app on streamlit sharing runtime
+- [ ] Test streamlit app on streamlit sharing runtime [FAILED]
 
 ## Problem
 
