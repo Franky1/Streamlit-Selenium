@@ -31,7 +31,7 @@ def run_selenium():
     with webdriver.Chrome(options=options, service_log_path='selenium.log') as driver:
         url = "https://www.unibet.fr/sport/football/europa-league/europa-league-matchs"
         driver.get(url)
-        time.sleep(1)
+        time.sleep(3) # waits for page load
         xpath = '//*[@class="ui-mainview-block eventpath-wrapper"]'
         results = driver.find_elements_by_xpath(xpath)
         name = results[0].get_property('attributes')[0]['name']
