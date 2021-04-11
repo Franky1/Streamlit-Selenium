@@ -1,8 +1,9 @@
 import os
-import time
+# import time
 import streamlit as st
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.wait import WebDriverWait
 
 options = Options()
 options.add_argument("--headless")
@@ -31,10 +32,11 @@ def run_selenium():
     with webdriver.Chrome(options=options, service_log_path='selenium.log') as driver:
         url = "https://www.unibet.fr/sport/football/europa-league/europa-league-matchs"
         driver.get(url)
-        time.sleep(3) # waits for page load
+        # time.sleep(3)
         xpath = '//*[@class="ui-mainview-block eventpath-wrapper"]'
-        results = driver.find_elements_by_xpath(xpath)
-        name = results[0].get_property('attributes')[0]['name']
+        element = WebDriverWait(driver, 10).until(lambda x : x.find_elements_by_xpath(xpath))
+        # element = driver.find_elements_by_xpath(xpath)
+        name = element[0].get_property('attributes')[0]['name']
         print(name)
         # driver.close()
     return name
@@ -49,7 +51,9 @@ if __name__ == "__main__":
         This app is only a very simple test for **Selenium** running on **Streamlit Sharing** runtime. <br>
         The suggestion for this demo app came from a post on the Streamlit Community Forum.  <br>
         <https://discuss.streamlit.io/t/issue-with-selenium-on-a-streamlit-app/11563>  <br>
-        Unfortunately this app does not work on Streamlit Sharing yet... 😞  <br>
+        Unfortunately this app has massive deployment issues on Streamlit Sharing 😞
+
+        ---
         """, unsafe_allow_html=True)
     if st.button('Start Selenium run'):
         st.info(f'Selenium is running, please wait...')
