@@ -32,4 +32,5 @@ binaries/
 *.md
 *.zip
 *.gz
+*.log
 LICENSE

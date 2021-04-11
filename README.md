@@ -38,7 +38,7 @@ Therefore, in this repository a small example is given to get Selenium working o
   2. chromium/chromedriver
   3. firefox/geckodriver
 - Unfortunately in the default Debian Buster apt package repositories, not all of these packages are available. If we want an installation from the default repositories, only `chromium/chromedriver` is left.
-- To make this repository cross-platform, the Windows 10 chromedriver is stored here in the root folder as well. Be aware, that the version of this chromedriver must match the version of your installed Chrome browser. The chromedriver may be outdated.
+- To make this repository cross-platform, the Windows 10 chromedriver is stored here in the root folder as well. Be aware, that the version of this chromedriver `ChromeDriver 89.0.4389.23` must match the version of your installed Chrome browser. The chromedriver may be outdated.
 - The chromedriver has a lot of options, that can be set. It may be necessary to tweak these options on different platforms to make headless operation work smoothly.
 
 ---
