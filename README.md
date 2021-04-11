@@ -62,8 +62,8 @@ chromium-driver
 A `requirements.txt` is provided with the following minimal content:
 
 ```txt
-selenium
-streamlit
+selenium==3.141.0
+streamlit==0.79.0
 ```
 
 ---
