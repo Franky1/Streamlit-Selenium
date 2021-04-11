@@ -23,7 +23,7 @@ def show_selenium_log():
     if os.path.exists('selenium.log'):
         with open('selenium.log') as f:
             content = f.read()
-            st.code(content, language='log')
+            st.code(content)
 
 
 def run_selenium():
