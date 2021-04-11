@@ -1,5 +1,4 @@
 import os
-# import time
 import streamlit as st
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -24,7 +23,7 @@ def show_selenium_log():
     if os.path.exists('selenium.log'):
         with open('selenium.log') as f:
             content = f.read()
-            st.code(content)
+            st.code(content, language='logging')
 
 
 def run_selenium():
@@ -32,8 +31,8 @@ def run_selenium():
     with webdriver.Chrome(options=options, service_log_path='selenium.log') as driver:
         url = "https://www.unibet.fr/sport/football/europa-league/europa-league-matchs"
         driver.get(url)
-        # time.sleep(3)
         xpath = '//*[@class="ui-mainview-block eventpath-wrapper"]'
+        # Wait for the element to be rendered:
         element = WebDriverWait(driver, 10).until(lambda x : x.find_elements_by_xpath(xpath))
         # element = driver.find_elements_by_xpath(xpath)
         name = element[0].get_property('attributes')[0]['name']
