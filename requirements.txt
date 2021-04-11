@@ -1,2 +1,2 @@
 selenium
-streamlit
+streamlit==0.79.0
