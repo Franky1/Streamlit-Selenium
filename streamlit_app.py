@@ -53,10 +53,16 @@ if __name__ == "__main__":
         Unfortunately this app has massive deployment issues on Streamlit Sharing 😞
 
         ---
+
+        This is just a very very simple example and more a proof of concept.
+        A link is called and waited for the existence of a specific class and read it. If there is no error message, the action was successful.
+        Afterwards the log file of chromium is read and displayed.
+
+        ---
         """, unsafe_allow_html=True)
     if st.button('Start Selenium run'):
         st.info(f'Selenium is running, please wait...')
         result = run_selenium()
         st.info(f'Result -> {result}')
-        st.info(f'Finished')
+        st.info(f'Successful finished. Selenium log file is shown below.')
         show_selenium_log()

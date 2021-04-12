@@ -6,10 +6,6 @@ Streamlit project to test Selenium running in Streamlit sharing runtime.
     Local Windows and Docker deployment works  
     Deployment to Streamlit Sharing fails most of the time 😞
 
-## ToDo
-
-- [ ] Test streamlit app on streamlit sharing runtime [FAILED]
-
 ## Problem
 
 The suggestion for this repo came from a post on the Streamlit Community Forum.
@@ -40,6 +36,7 @@ Therefore, in this repository a small example is given to get Selenium working o
 - Unfortunately in the default Debian Buster apt package repositories, not all of these packages are available. If we want an installation from the default repositories, only `chromium/chromedriver` is left.
 - To make this repository cross-platform, the Windows 10 chromedriver is stored here in the root folder as well. Be aware, that the version of this chromedriver `ChromeDriver 89.0.4389.23` must match the version of your installed Chrome browser. The chromedriver may be outdated.
 - The chromedriver has a lot of options, that can be set. It may be necessary to tweak these options on different platforms to make headless operation work smoothly.
+- The deployment to streamlit sharing has unfortunately failed very often. A concrete cause of the error or an informative error message could not be identified. In a few cases, however, it did work.
 
 ---
 
@@ -79,13 +76,15 @@ Docker Images that come close to the actual streamlit sharing runtime:
 
 ### Docker Container local
 
-Pulling the image from Docker Hub
+The provided `Dockerfile` tries to mimic the Streamlit Sharing runtime.
+
+Pulling the base image from Docker Hub
 
 ```shell
 docker pull python:3.7.10-slim
 ```
 
-Run and shell into default python container
+Run and shell into base python container
 
 ```shell
 docker run -it --name py3710slim python:3.7.10-slim /bin/bash
