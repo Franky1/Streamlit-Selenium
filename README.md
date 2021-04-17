@@ -93,26 +93,22 @@ docker run -ti --rm python:3.7.10-slim /bin/bash
 Build local custom Docker Image from Dockerfile
 
 ```shell
-docker build -t franky1/docker-streamlit-selenium:latest .
-docker run -ti --name selenium --rm franky1/docker-streamlit-selenium:latest /bin/bash
+docker build -t streamlit:latest .
+docker run -ti --name selenium --rm streamlit:latest /bin/bash
 ```
 
 Run custom Docker Container
 
 ```shell
-docker run -ti -p 8080:8080 --rm franky1/docker-streamlit-selenium:latest
-docker run -ti -p 8080:8080 -v $(pwd):/app --rm franky1/docker-streamlit-selenium:latest  # linux
-docker run -ti -p 8080:8080 -v ${pwd}:/app --rm franky1/docker-streamlit-selenium:latest  # powershell
-docker run -ti -p 8080:8080 -v %cd%:/app --rm franky1/docker-streamlit-selenium:latest  # cmd.exe
+docker run -ti -p 8501:8501 --rm streamlit:latest
+docker run -ti -p 8501:8501 -v $(pwd):/app --rm streamlit:latest  # linux
+docker run -ti -p 8501:8501 -v ${pwd}:/app --rm streamlit:latest  # powershell
+docker run -ti -p 8501:8501 -v %cd%:/app --rm streamlit:latest  # cmd.exe
 ```
 
 Open the local Streamlit application
 
-<http://localhost:8080> for the dockerized application
-
-or
-
-<http://localhost:8501> for the local application
+<http://localhost:8501> for the local or dockerized application
 
 ---
 

@@ -3,7 +3,7 @@ FROM python:3.7.10-slim
 WORKDIR /app
 COPY . .
 
-# CAVEAT: packages.txt must exist and have Linux LF only!
+# CAVEAT: packages.txt must exist and have Linux LF only!!!
 RUN apt-get update
 RUN xargs -a packages.txt apt-get install --yes
 RUN pip install --no-cache-dir -r requirements.txt

@@ -36,8 +36,7 @@ def run_selenium():
         element = WebDriverWait(driver, 10).until(lambda x : x.find_elements_by_xpath(xpath))
         # element = driver.find_elements_by_xpath(xpath)
         name = element[0].get_property('attributes')[0]['name']
-        print(name)
-        # driver.close()
+        # print(name)
     return name
 
 
@@ -51,8 +50,6 @@ if __name__ == "__main__":
         The suggestion for this demo app came from a post on the Streamlit Community Forum.  <br>
         <https://discuss.streamlit.io/t/issue-with-selenium-on-a-streamlit-app/11563>  <br>
         Unfortunately this app has deployment issues on Streamlit Sharing, sometimes deployment fails, sometimes not... 😞
-
-        ---
 
         This is just a very very simple example and more a proof of concept.
         A link is called and waited for the existence of a specific class and read it. If there is no error message, the action was successful.

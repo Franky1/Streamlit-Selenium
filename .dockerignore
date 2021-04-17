@@ -34,3 +34,5 @@ binaries/
 *.gz
 *.log
 LICENSE
+.git/
+.gitignore
