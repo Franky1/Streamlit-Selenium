@@ -52,7 +52,6 @@ A `packages.txt` is provided with the following minimal content:
 
 ```txt
 chromium
-chromium-common
 chromium-driver
 ```
 
@@ -60,7 +59,7 @@ A `requirements.txt` is provided with the following minimal content:
 
 ```txt
 selenium==3.141.0
-streamlit==0.79.0
+streamlit==0.80.0
 ```
 
 ---
@@ -107,6 +106,14 @@ docker run -ti -p 8080:8080 -v ${pwd}:/app --rm franky1/docker-streamlit-seleniu
 docker run -ti -p 8080:8080 -v %cd%:/app --rm franky1/docker-streamlit-selenium:latest  # cmd.exe
 ```
 
+Open the local Streamlit application
+
+<http://localhost:8080> for the dockerized application
+
+or
+
+<http://localhost:8501> for the local application
+
 ---
 
 ## Selenium
@@ -123,7 +130,6 @@ Required packages to install
 
 ```
 apt install chromium
-apt install chromium-common
 apt install chromium-driver
 ```
 
@@ -136,4 +142,4 @@ apt install chromium-driver
 ## Status
 
 - WORK IN PROGRESS - not finished yet
-- Last changes: 11.04.2021
+- Last changes: 17.04.2021

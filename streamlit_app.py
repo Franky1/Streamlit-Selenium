@@ -50,7 +50,7 @@ if __name__ == "__main__":
         This app is only a very simple test for **Selenium** running on **Streamlit Sharing** runtime. <br>
         The suggestion for this demo app came from a post on the Streamlit Community Forum.  <br>
         <https://discuss.streamlit.io/t/issue-with-selenium-on-a-streamlit-app/11563>  <br>
-        Unfortunately this app has massive deployment issues on Streamlit Sharing, sometimes deployment fails, sometimes not... 😞
+        Unfortunately this app has deployment issues on Streamlit Sharing, sometimes deployment fails, sometimes not... 😞
 
         ---
 
