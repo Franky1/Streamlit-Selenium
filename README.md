@@ -5,16 +5,16 @@ Streamlit project to test Selenium running in Streamlit sharing runtime.
 - [x] **Local Windows 10** machine works
 - [x] **Local Docker** container works
 - [x] **Streamlit Sharing** runtime works
-     
-> Deployment to Streamlit Sharing fails sometimes for unknown reason 😞
+
+> Deployment to Streamlit Sharing fails sometimes for unknown reason
 
 ## ToDo
 
+- [x] cleanup repo
 - [x] update Streamlit version
-- [ ] improve example
 - [x] add `docker-compose.yml` file for easier deployment
-- [ ] test docker compose
-- [ ] cleanup repo
+- [ ] test `docker compose`
+- [ ] improve example
 
 ## Problem
 
@@ -129,7 +129,7 @@ docker compose up
 
 Open the local Streamlit application:
 
-<http://localhost:8501> 
+<http://localhost:8501>
 
 for local Windows or local Docker application.
 
@@ -147,7 +147,7 @@ pip install selenium
 
 Required packages to install
 
-```
+```shell
 apt install chromium
 apt install chromium-driver
 ```

@@ -2,7 +2,7 @@
 
 Just a scratchpad of useful commands regarding packages.
 
-### search for apt packages
+## search for apt packages
 
 ```sh
 apt update

@@ -34,6 +34,8 @@ binaries/
 *.gz
 *.log
 LICENSE
+Packages.md
 .git/
 .gitignore
+.streamlit/secrets.toml
 scratchpad/
