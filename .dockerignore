@@ -37,5 +37,6 @@ LICENSE
 Packages.md
 .git/
 .gitignore
+.gitattributes
 .streamlit/secrets.toml
 scratchpad/

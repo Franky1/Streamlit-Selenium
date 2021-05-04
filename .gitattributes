@@ -1,0 +1,4 @@
+# Never modify line endings of our bash scripts
+*.sh -crlf
+packages.txt -crlf
+.env -crlf
