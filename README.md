@@ -39,13 +39,13 @@ Therefore, in this repository a small example is given to get Selenium working o
 - The versions of the webbrowser and its associated webdriver must match.
 - If your are using Selenium in a docker container or on streamlit sharing, the `--headless` option is mandatory, because there ist no UI available.
 - There are three options of webbrowser/webdriver combinations for Selenium:
-  1. chrome/chromedriver
-  2. chromium/chromedriver
-  3. firefox/geckodriver
+  1. `chrome & chromedriver`
+  2. `chromium & chromedriver`
+  3. `firefox & geckodriver`
 - Unfortunately in the default Debian Buster apt package repositories, not all of these packages are available. If we want an installation from the default repositories, only `chromium/chromedriver` is left.
 - To make this repository cross-platform, the Windows 10 chromedriver is stored here in the root folder as well. Be aware, that the version of this chromedriver `ChromeDriver 89.0.4389.23` must match the version of your installed Chrome browser. The chromedriver may be outdated.
 - The chromedriver has a lot of options, that can be set. It may be necessary to tweak these options on different platforms to make headless operation work smoothly.
-- The deployment to streamlit sharing has unfortunately failed very often. A concrete cause of the error or an informative error message could not be identified. In a few cases, however, it did work.
+- The deployment to streamlit sharing has unfortunately failed sometimes. A concrete cause of the error or an informative error message could not be identified. Currently it seems to be stable during deplyoment.
 
 ---
 
@@ -68,7 +68,7 @@ A `requirements.txt` is provided with the following minimal content:
 
 ```txt
 selenium==3.141.0
-streamlit==0.80.0
+streamlit==0.81.0
 ```
 
 ---
