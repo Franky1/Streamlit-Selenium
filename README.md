@@ -2,9 +2,17 @@
 
 Streamlit project to test Selenium running in Streamlit sharing runtime.
 
-    WORK IN PROGRESSs  
-    Local Windows and Docker deployment works  
-    Deployment to Streamlit Sharing fails sometimes for unknown reason 😞
+- [x] **Local Windows 10** machine works
+- [x] **Local Docker** container works
+- [x] **Streamlit Sharing** runtime works
+     
+> Deployment to Streamlit Sharing fails sometimes for unknown reason 😞
+
+## ToDo
+
+- [ ] update Streamlit version
+- [ ] improve example
+- [ ] add `docker-compose.yml` file for easier deployment
 
 ## Problem
 
@@ -18,9 +26,9 @@ In container-based environments, however, headless operation is mandatory becaus
 
 Therefore, in this repository a small example is given to get Selenium working on:
 
-- Local Windows 10 machine
-- Local docker container that mimics the streamlit sharing runtime
-- Streamlit Sharing runtime
+- **Local Windows 10** machine
+- **Local Docker** container that mimics the streamlit sharing runtime
+- **Streamlit Sharing** runtime
 
 ---
 
@@ -138,4 +146,4 @@ apt install chromium-driver
 ## Status
 
 - WORK IN PROGRESS - not finished yet
-- Last changes: 17.04.2021
+- Last changes: 04.05.2021
