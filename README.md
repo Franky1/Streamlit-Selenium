@@ -10,9 +10,10 @@ Streamlit project to test Selenium running in Streamlit sharing runtime.
 
 ## ToDo
 
-- [ ] update Streamlit version
+- [x] update Streamlit version
 - [ ] improve example
-- [ ] add `docker-compose.yml` file for easier deployment
+- [x] add `docker-compose.yml` file for easier deployment
+- [ ] test docker compose
 
 ## Problem
 
@@ -114,9 +115,22 @@ docker run -ti -p 8501:8501 -v ${pwd}:/app --rm streamlit:latest  # powershell
 docker run -ti -p 8501:8501 -v %cd%:/app --rm streamlit:latest  # cmd.exe
 ```
 
-Open the local Streamlit application
+### Docker Compose local
 
-<http://localhost:8501> for the local or dockerized application
+Just run:
+
+```shell
+docker compose build
+docker compose up
+```
+
+### Streamlit URL
+
+Open the local Streamlit application:
+
+<http://localhost:8501> 
+
+for local Windows or local Docker application.
 
 ---
 
@@ -145,5 +159,5 @@ apt install chromium-driver
 
 ## Status
 
-- WORK IN PROGRESS - not finished yet
+- WORK IN PROGRESS
 - Last changes: 04.05.2021
