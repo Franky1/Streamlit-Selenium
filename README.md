@@ -4,7 +4,7 @@ Streamlit project to test Selenium running in Streamlit sharing runtime.
 
 - [x] **Local Windows 10** machine works
 - [x] **Local Docker** container works
-- [x] **Streamlit Sharing** runtime works
+- [x] **Streamlit Sharing** runtime works (sometimes)
 
 > Deployment to Streamlit Sharing fails sometimes for unknown reason
 
