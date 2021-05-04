@@ -10,6 +10,7 @@ Streamlit project to test Selenium running in Streamlit sharing runtime.
 
 ## ToDo
 
+- [ ] BUGFIX: chromedriver seems to be no longer in the PATH of the Streamlit sharing runtime
 - [x] cleanup repo
 - [x] update Streamlit version
 - [x] add `docker-compose.yml` file for easier deployment
