@@ -14,6 +14,7 @@ Streamlit project to test Selenium running in Streamlit sharing runtime.
 - [ ] improve example
 - [x] add `docker-compose.yml` file for easier deployment
 - [ ] test docker compose
+- [ ] cleanup repo
 
 ## Problem
 
