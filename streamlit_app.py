@@ -1,3 +1,4 @@
+import glob
 import os
 
 import streamlit as st
@@ -27,14 +28,20 @@ def show_selenium_log():
             st.code(content)
 
 
-def run_selenium():
+def get_chromedriver_path():
+    results = glob.glob('/home/**/chromedriver', recursive=True)  # workaround on streamlit sharing
+    which = results[0]
+    return which
+
+
+def run_selenium(executable_path):
     name = str()
-    with webdriver.Chrome(options=options, service_log_path='selenium.log') as driver:
+    with webdriver.Chrome(executable_path=executable_path, options=options, service_log_path='selenium.log') as driver:
         url = "https://www.unibet.fr/sport/football/europa-league/europa-league-matchs"
         driver.get(url)
         xpath = '//*[@class="ui-mainview-block eventpath-wrapper"]'
         # Wait for the element to be rendered:
-        element = WebDriverWait(driver, 10).until(lambda x : x.find_elements_by_xpath(xpath))
+        element = WebDriverWait(driver, 10).until(lambda x: x.find_elements_by_xpath(xpath))
         # element = driver.find_elements_by_xpath(xpath)
         name = element[0].get_property('attributes')[0]['name']
         # print(name)
@@ -58,10 +65,12 @@ if __name__ == "__main__":
 
         ---
         """, unsafe_allow_html=True)
+    executable_path = get_chromedriver_path()
+    st.info(f'Chromedriver Path: {str(executable_path)}')
     st.balloons()
     if st.button('Start Selenium run'):
-        st.info(f'Selenium is running, please wait...')
-        result = run_selenium()
+        st.info('Selenium is running, please wait...')
+        result = run_selenium(executable_path)
         st.info(f'Result -> {result}')
-        st.info(f'Successful finished. Selenium log file is shown below.')
+        st.info('Successful finished. Selenium log file is shown below...')
         show_selenium_log()
