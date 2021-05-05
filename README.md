@@ -11,9 +11,7 @@ Streamlit project to test Selenium running in Streamlit sharing runtime.
 ## ToDo
 
 - [ ] BUGFIX: chromedriver seems to be no longer in the PATH of the Streamlit sharing runtime
-- [x] cleanup repo
-- [x] update Streamlit version
-- [x] add `docker-compose.yml` file for easier deployment
+- [ ] cleanup repo
 - [ ] test `docker compose`
 - [ ] improve example
 
@@ -37,7 +35,7 @@ Therefore, in this repository a small example is given to get Selenium working o
 
 ## Pitfalls
 
-- To use Selenium (even headless in a container) you need always *two* components to be installed on your machine: A webbrowser and its associated webdriver.
+- To use Selenium (even headless in a container) you need always **two** components to be installed on your machine: A **webbrowser** and its associated **webdriver**.
 - The versions of the webbrowser and its associated webdriver must match.
 - If your are using Selenium in a docker container or on streamlit sharing, the `--headless` option is mandatory, because there ist no UI available.
 - There are three options of webbrowser/webdriver combinations for Selenium:
@@ -70,7 +68,7 @@ A `requirements.txt` is provided with the following minimal content:
 
 ```txt
 selenium==3.141.0
-streamlit==0.81.0
+streamlit==0.81.1
 ```
 
 ---
@@ -162,4 +160,4 @@ apt install chromium-driver
 ## Status
 
 - WORK IN PROGRESS
-- Last changes: 04.05.2021
+- Last changes: 05.05.2021
