@@ -1,0 +1,7 @@
+channels:
+  - conda-forge
+dependencies:
+  - firefox==88.0
+  - geckodriver==0.29.0
+  - selenium==3.141.0
+  - streamlit==0.81.1

@@ -15,7 +15,7 @@ Streamlit project to test Selenium running in Streamlit sharing runtime.
 - [ ] test `docker compose`
 - [ ] improve example
 - [ ] try out conda deployment for more options to install dependencies:
-  - <https://discuss.streamlit.io/t/managing-your-streamlit-dependencies-using-conda/12346> 
+  - <https://discuss.streamlit.io/t/managing-your-streamlit-dependencies-using-conda/12346>
 
 ## Problem
 
@@ -160,7 +160,40 @@ apt install chromium-driver
 
 ---
 
+### Webdriver Manager for Python
+
+- <https://github.com/SergeyPirogov/webdriver_manager>
+- <https://pypi.org/project/webdriver-manager/>
+
+Another option to try to install the right webdriver?
+
+```shell
+pip install webdriver-manager
+```
+
+```python
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.utils import ChromeType
+
+driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install())
+```
+
+### Geckodriver
+
+<https://pypi.org/project/geckodriver-autoinstaller/>
+
+### selenium_driver_updater
+
+<https://github.com/Svinokur/selenium_driver_updater>
+
+### chromedriver-binary-auto
+
+<https://github.com/danielkaiser/python-chromedriver-binary>
+
+---
+
 ## Status
 
 - WORK IN PROGRESS
-- Last changes: 05.05.2021
+- Last changes: 06.05.2021
