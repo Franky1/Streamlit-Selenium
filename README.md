@@ -4,13 +4,14 @@ Streamlit project to test Selenium running in Streamlit sharing runtime.
 
 - [x] **Local Windows 10** machine works
 - [x] **Local Docker** container works
-- [x] **Streamlit Sharing** runtime works (sometimes)
+- [ ] **Streamlit Sharing** runtime works (currently not...)
 
 > Deployment to Streamlit Sharing fails sometimes for unknown reason
 
 ## ToDo
 
 - [ ] BUGFIX: chromedriver seems to be no longer in the PATH of the streamlit sharing runtime
+- [ ] BUGFIX: installation of chromium fails during deployment
 - [ ] cleanup repo
 - [ ] test `docker compose`
 - [ ] improve example
