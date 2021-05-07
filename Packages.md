@@ -46,3 +46,56 @@ deb http://security.debian.org/debian-security buster/updates main
 # deb http://snapshot.debian.org/archive/debian/20210329T000000Z buster-updates main
 deb http://deb.debian.org/debian buster-updates main
 ```
+
+### apt-cache policy
+
+```shell
+apt-cache policy chromium
+```
+
+Result:
+
+```log
+chromium:
+  Installed: (none)
+  Candidate: 89.0.4389.114-1~deb10u1
+  Version table:
+     89.0.4389.114-1~deb10u1 500
+        500 http://security.debian.org/debian-security buster/updates/main amd64 Packages
+     88.0.4324.182-1~deb10u1 500
+        500 http://deb.debian.org/debian buster/main amd64 Packages
+```
+
+```shell
+apt-cache policy chromium-common
+```
+
+Result:
+
+```log
+chromium-common:
+  Installed: (none)
+  Candidate: 89.0.4389.114-1~deb10u1
+  Version table:
+     89.0.4389.114-1~deb10u1 500
+        500 http://security.debian.org/debian-security buster/updates/main amd64 Packages
+     88.0.4324.182-1~deb10u1 500
+        500 http://deb.debian.org/debian buster/main amd64 Packages
+```
+
+```shell
+apt-cache policy chromium-driver
+```
+
+Result:
+
+```log
+chromium-driver:
+  Installed: (none)
+  Candidate: 89.0.4389.114-1~deb10u1
+  Version table:
+     89.0.4389.114-1~deb10u1 500
+        500 http://security.debian.org/debian-security buster/updates/main amd64 Packages
+     88.0.4324.182-1~deb10u1 500
+        500 http://deb.debian.org/debian buster/main amd64 Packages
+```
