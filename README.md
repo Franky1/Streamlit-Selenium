@@ -4,16 +4,13 @@ Streamlit project to test Selenium running in Streamlit sharing runtime.
 
 - [x] **Local Windows 10** machine works
 - [x] **Local Docker** container works
-- [ ] **Streamlit Sharing** runtime works (currently not...)
+- [x] **Streamlit Sharing** runtime works (sometimes)
 
 > Deployment to Streamlit Sharing fails sometimes for unknown reason
 
 ## ToDo
 
-- [ ] BUGFIX: chromedriver seems to be no longer in the PATH of the streamlit sharing runtime
-- [ ] BUGFIX: installation of chromium fails during deployment
 - [ ] cleanup repo
-- [ ] test `docker compose`
 - [ ] improve example
 - [ ] try out conda deployment for more options to install dependencies:
   - <https://discuss.streamlit.io/t/managing-your-streamlit-dependencies-using-conda/12346>
@@ -72,7 +69,7 @@ A `requirements.txt` is provided with the following minimal content:
 
 ```txt
 selenium==3.141.0
-streamlit==0.81.1
+streamlit
 ```
 
 ---
@@ -197,4 +194,4 @@ driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).i
 ## Status
 
 - WORK IN PROGRESS
-- Last changes: 06.05.2021
+- Last changes: 07.05.2021

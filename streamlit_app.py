@@ -34,7 +34,7 @@ def get_chromedriver_path():
     return which
 
 
-def run_selenium(executable_path):
+def run_selenium():
     name = str()
     with webdriver.Chrome(options=options, service_log_path='selenium.log') as driver:
         url = "https://www.unibet.fr/sport/football/europa-league/europa-league-matchs"
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     st.balloons()
     if st.button('Start Selenium run'):
         st.info('Selenium is running, please wait...')
-        result = run_selenium(executable_path)
+        result = run_selenium()
         st.info(f'Result -> {result}')
         st.info('Successful finished. Selenium log file is shown below...')
         show_selenium_log()
