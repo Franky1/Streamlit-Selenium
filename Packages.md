@@ -49,6 +49,15 @@ deb http://deb.debian.org/debian buster-updates main
 
 ---
 
+## Issue
+
+```log
+E: Failed to fetch http://security.debian.org/debian-security/pool/updates/main/c/chromium/chromium-common_89.0.4389.114-1~deb10u1_amd64.deb  404  Not Found [IP: 151.101.54.132 80]
+E: Failed to fetch http://security.debian.org/debian-security/pool/updates/main/c/chromium/chromium_89.0.4389.114-1~deb10u1_amd64.deb  404  Not Found [IP: 151.101.54.132 80]
+E: Failed to fetch http://security.debian.org/debian-security/pool/updates/main/c/chromium/chromium-driver_89.0.4389.114-1~deb10u1_amd64.deb  404  Not Found [IP: 151.101.54.132 80]
+E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+```
+
 ### apt-cache policy
 
 #### apt-cache policy chromium
