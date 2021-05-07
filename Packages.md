@@ -47,7 +47,11 @@ deb http://security.debian.org/debian-security buster/updates main
 deb http://deb.debian.org/debian buster-updates main
 ```
 
+---
+
 ### apt-cache policy
+
+#### apt-cache policy chromium
 
 ```shell
 apt-cache policy chromium
@@ -55,7 +59,7 @@ apt-cache policy chromium
 
 Result:
 
-```log
+```shell
 chromium:
   Installed: (none)
   Candidate: 89.0.4389.114-1~deb10u1
@@ -66,13 +70,15 @@ chromium:
         500 http://deb.debian.org/debian buster/main amd64 Packages
 ```
 
+#### apt-cache policy chromium-common
+
 ```shell
 apt-cache policy chromium-common
 ```
 
 Result:
 
-```log
+```shell
 chromium-common:
   Installed: (none)
   Candidate: 89.0.4389.114-1~deb10u1
@@ -83,13 +89,15 @@ chromium-common:
         500 http://deb.debian.org/debian buster/main amd64 Packages
 ```
 
+#### apt-cache policy chromium-driver
+
 ```shell
 apt-cache policy chromium-driver
 ```
 
 Result:
 
-```log
+```shell
 chromium-driver:
   Installed: (none)
   Candidate: 89.0.4389.114-1~deb10u1
