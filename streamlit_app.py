@@ -36,7 +36,7 @@ def get_chromedriver_path():
 
 def run_selenium(executable_path):
     name = str()
-    with webdriver.Chrome(executable_path=executable_path, options=options, service_log_path='selenium.log') as driver:
+    with webdriver.Chrome(options=options, service_log_path='selenium.log') as driver:
         url = "https://www.unibet.fr/sport/football/europa-league/europa-league-matchs"
         driver.get(url)
         xpath = '//*[@class="ui-mainview-block eventpath-wrapper"]'
@@ -65,8 +65,9 @@ if __name__ == "__main__":
 
         ---
         """, unsafe_allow_html=True)
-    executable_path = get_chromedriver_path()
-    st.info(f'Chromedriver Path: {str(executable_path)}')
+    # executable_path = get_chromedriver_path()
+    executable_path = "notset"
+    # st.info(f'Chromedriver Path: {str(executable_path)}')
     st.balloons()
     if st.button('Start Selenium run'):
         st.info('Selenium is running, please wait...')
