@@ -30,8 +30,7 @@ def show_selenium_log():
 
 def get_chromedriver_path():
     results = glob.glob('/**/chromedriver', recursive=True)  # workaround on streamlit sharing
-    which = results[0]
-    return which
+    return results[0]
 
 
 def run_selenium():

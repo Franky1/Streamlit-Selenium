@@ -10,7 +10,7 @@ Streamlit project to test Selenium running in Streamlit sharing runtime.
 
 ## ToDo
 
-- [ ] cleanup repo
+- [x] cleanup repo
 - [ ] improve example
 - [ ] try out conda deployment for more options to install dependencies:
   - <https://discuss.streamlit.io/t/managing-your-streamlit-dependencies-using-conda/12346>
@@ -68,7 +68,7 @@ chromium-driver
 A `requirements.txt` is provided with the following minimal content:
 
 ```txt
-selenium==3.141.0
+selenium==4.1.3
 streamlit
 ```
 
@@ -103,26 +103,18 @@ docker run -ti --rm python:3.7.10-slim /bin/bash
 Build local custom Docker Image from Dockerfile
 
 ```shell
-docker build -t streamlit:latest .
-docker run -ti --name selenium --rm streamlit:latest /bin/bash
+docker build --progress=plain --tag selenium:latest .
+docker run -ti --name selenium --rm selenium:latest /bin/bash
 ```
 
 Run custom Docker Container
 
 ```shell
-docker run -ti -p 8501:8501 --rm streamlit:latest
-docker run -ti -p 8501:8501 -v $(pwd):/app --rm streamlit:latest  # linux
-docker run -ti -p 8501:8501 -v ${pwd}:/app --rm streamlit:latest  # powershell
-docker run -ti -p 8501:8501 -v %cd%:/app --rm streamlit:latest  # cmd.exe
-```
-
-### Docker Compose local
-
-Just run:
-
-```shell
-docker compose build
-docker compose up
+docker run -ti -p 8501:8501 --rm selenium:latest /bin/bash
+docker run -ti -p 8501:8501 --rm selenium:latest
+docker run -ti -p 8501:8501 -v $(pwd):/app --rm selenium:latest  # linux
+docker run -ti -p 8501:8501 -v ${pwd}:/app --rm selenium:latest  # powershell
+docker run -ti -p 8501:8501 -v %cd%:/app --rm selenium:latest  # cmd.exe
 ```
 
 ### Streamlit URL
@@ -193,5 +185,4 @@ driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).i
 
 ## Status
 
-- WORK IN PROGRESS
-- Last changes: 07.05.2021
+> Last changes: 18.04.2022
