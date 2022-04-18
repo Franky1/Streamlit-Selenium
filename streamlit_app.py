@@ -5,6 +5,7 @@ import streamlit as st
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.by import By
 
 options = Options()
 options.add_argument("--headless")
@@ -40,7 +41,7 @@ def run_selenium():
         driver.get(url)
         xpath = '//*[@class="ui-mainview-block eventpath-wrapper"]'
         # Wait for the element to be rendered:
-        element = WebDriverWait(driver, 10).until(lambda x: x.find_elements_by_xpath(xpath))
+        element = WebDriverWait(driver, 10).until(lambda x: x.find_elements(by=By.XPATH, value=xpath))
         # element = driver.find_elements_by_xpath(xpath)
         name = element[0].get_property('attributes')[0]['name']
         # print(name)
