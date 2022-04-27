@@ -6,14 +6,12 @@ Streamlit project to test Selenium running in Streamlit sharing runtime.
 - [x] **Local Docker** container works
 - [x] **Streamlit Sharing** runtime works (sometimes)
 
-> Deployment to Streamlit Sharing fails sometimes for unknown reason
+> Deployment to Streamlit Sharing fails in rare cases for unknown reason
 
 ## ToDo
 
 - [x] cleanup repo
 - [ ] improve example
-- [ ] try out conda deployment for more options to install dependencies:
-  - <https://discuss.streamlit.io/t/managing-your-streamlit-dependencies-using-conda/12346>
 
 ## Problem
 
