@@ -29,9 +29,10 @@ def show_selenium_log():
             st.code(content)
 
 
-def get_chromedriver_path():
-    results = glob.glob('/**/chromedriver', recursive=True)  # workaround on streamlit sharing
-    return results[0]
+# not required anymore:
+# def get_chromedriver_path():
+#     results = glob.glob('/**/chromedriver', recursive=True)  # workaround on streamlit sharing
+#     return results[0]
 
 
 def run_selenium():
@@ -42,9 +43,7 @@ def run_selenium():
         xpath = '//*[@class="ui-mainview-block eventpath-wrapper"]'
         # Wait for the element to be rendered:
         element = WebDriverWait(driver, 10).until(lambda x: x.find_elements(by=By.XPATH, value=xpath))
-        # element = driver.find_elements_by_xpath(xpath)
         name = element[0].get_property('attributes')[0]['name']
-        # print(name)
     return name
 
 
@@ -65,9 +64,7 @@ if __name__ == "__main__":
 
         ---
         """, unsafe_allow_html=True)
-    # executable_path = get_chromedriver_path()
-    executable_path = "notset"
-    # st.info(f'Chromedriver Path: {str(executable_path)}')
+
     st.balloons()
     if st.button('Start Selenium run'):
         st.info('Selenium is running, please wait...')
