@@ -56,7 +56,7 @@ if __name__ == "__main__":
         This app is only a very simple test for **Selenium** running on **Streamlit Sharing** runtime. <br>
         The suggestion for this demo app came from a post on the Streamlit Community Forum.  <br>
         <https://discuss.streamlit.io/t/issue-with-selenium-on-a-streamlit-app/11563>  <br>
-        Sometimes this app has deployment issues on Streamlit Sharing, sometimes deployment fails, sometimes not... 😞
+        In rare cases this app has deployment issues on Streamlit Cloud and the deployment fails, but usually it works.
 
         This is just a very very simple example and more a proof of concept.
         A link is called and waited for the existence of a specific class and read it. If there is no error message, the action was successful.
