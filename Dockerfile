@@ -17,12 +17,12 @@ RUN apt-get update \
     python3-dev
 
 WORKDIR /app
-COPY requirements.txt requirements.txt
 
 # if we have a packages.txt, install it
 COPY packages.txt packages.txt
 RUN xargs -a packages.txt apt-get install --yes
 
+COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 EXPOSE 8501
@@ -35,3 +35,4 @@ CMD ["streamlit", "run", "app.py"]
 # docker run -ti -p 8501:8501 --rm selenium:latest /bin/bash
 # docker run -ti -p 8501:8501 --rm selenium:latest
 # docker run -ti -p 8501:8501 -v ${pwd}:/app --rm selenium:latest
+# docker run -ti -p 8501:8501 -v ${pwd}:/app --rm selenium:latest /bin/bash

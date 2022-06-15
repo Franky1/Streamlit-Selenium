@@ -4,9 +4,7 @@ Streamlit project to test Selenium running in Streamlit sharing runtime.
 
 - [x] **Local Windows 10** machine works
 - [x] **Local Docker** container works
-- [x] **Streamlit Sharing** runtime works (sometimes)
-
-> Deployment to Streamlit Sharing fails in rare cases for unknown reason
+- [x] **Streamlit Sharing** runtime works
 
 ## ToDo
 
@@ -42,9 +40,9 @@ Therefore, in this repository a small example is given to get Selenium working o
     2. `chromium & chromedriver`
     3. `firefox & geckodriver`
 - Unfortunately in the default Debian Buster apt package repositories, not all of these packages are available. If we want an installation from the default repositories, only `chromium & chromedriver` is left.
-- To make this repository cross-platform, the Windows 10 chromedriver is stored here in the root folder as well. Be aware, that the version of this chromedriver `ChromeDriver 89.0.4389.23` must match the version of your installed Chrome browser. The chromedriver may be outdated.
+- To make this repository cross-platform, the Windows 10 chromedriver is stored here in the root folder as well. Be aware, that the version of this chromedriver `ChromeDriver 89.0.4389.23` must match the version of your installed Chrome browser. The chromedriver may be outdated. `PS: This information is outdated, always download the latest chromedriver version for Windows yourself`.
 - The chromedriver has a lot of options, that can be set. It may be necessary to tweak these options on different platforms to make headless operation work smoothly.
-- The deployment to streamlit sharing has unfortunately failed sometimes. A concrete cause of the error or an informative error message could not be identified. Currently it seems to be stable during deplyoment.
+- The deployment to streamlit sharing has unfortunately failed sometimes in the past. A concrete cause of the error or an informative error message could not be identified. Currently it seems to be stable during deplyoment.
 
 ---
 
@@ -52,7 +50,7 @@ Therefore, in this repository a small example is given to get Selenium working o
 
 In the streamlit sharing runtime, neither chrome, chromedriver nor geckodriver are available in the default apt package sources.
 
-The streamlit sharing runtime seems to be very similar to the official docker image `python:3.7.10-slim` on Docker Hub, which is based on Debian Buster.
+The streamlit sharing runtime seems to be very similar to the official docker image `python:3.X-slim` on Docker Hub, which is based on Debian Buster.
 
 In this repository a `Dockerfile` is provided that mimics the streamlit sharing runtime. It can be used for local testing.
 
@@ -66,7 +64,7 @@ chromium-driver
 A `requirements.txt` is provided with the following minimal content:
 
 ```txt
-selenium==4.1.3
+selenium==4.2.0
 streamlit
 ```
 
@@ -88,14 +86,14 @@ The provided `Dockerfile` tries to mimic the Streamlit Sharing runtime.
 Pulling the base image from Docker Hub
 
 ```shell
-docker pull python:3.7.10-slim
+docker pull python:3.9-slim
 ```
 
-Run and shell into base python container
+Run and shell into base Python container
 
 ```shell
-docker run -it --name py3710slim python:3.7.10-slim /bin/bash
-docker run -ti --rm python:3.7.10-slim /bin/bash
+docker run -it --name py39slim python:3.9-slim /bin/bash
+docker run -ti --rm python:3.9-slim /bin/bash
 ```
 
 Build local custom Docker Image from Dockerfile
@@ -153,7 +151,7 @@ apt install chromium-driver
 - <https://github.com/SergeyPirogov/webdriver_manager>
 - <https://pypi.org/project/webdriver-manager/>
 
-Another option to try to install the right webdriver?
+> Another option to try to install the right webdriver? But this may not work on Streamlit Cloud.
 
 ```shell
 pip install webdriver-manager
@@ -183,4 +181,4 @@ driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).i
 
 ## Status
 
-> Last changes: 18.04.2022
+> Last changes: 15.06.2022
