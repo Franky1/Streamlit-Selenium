@@ -1,4 +1,3 @@
-import glob
 import os
 
 import streamlit as st
@@ -27,12 +26,6 @@ def show_selenium_log():
         with open('selenium.log') as f:
             content = f.read()
             st.code(content)
-
-
-# not required anymore:
-# def get_chromedriver_path():
-#     results = glob.glob('/**/chromedriver', recursive=True)  # workaround on streamlit sharing
-#     return results[0]
 
 
 def run_selenium():

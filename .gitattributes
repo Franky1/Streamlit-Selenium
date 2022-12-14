@@ -1,4 +1,4 @@
-# Never modify line endings of our bash scripts
-*.sh -crlf
-*.txt -crlf
-.env -crlf
+# Only use LF line endings of our bash scripts and txt files
+*.sh -lf
+*.txt -lf
+.env -lf

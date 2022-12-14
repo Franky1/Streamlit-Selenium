@@ -1,0 +1,8 @@
+refactor:
+  python_version: '3.9'
+  skip:
+    - assign-if-exp
+    - inline-immediately-returned-variable
+    - list-literal
+    - dict-literal
+    - use-named-expression
