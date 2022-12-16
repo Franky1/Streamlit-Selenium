@@ -1,6 +1,6 @@
 # Streamlit Selenium Test
 
-Streamlit project to test Selenium running in Streamlit sharing runtime.
+Streamlit project to test Selenium running in Streamlit Cloud runtime.
 
 - [x] **Local Windows 10** machine works
 - [x] **Local Docker** container works
@@ -35,7 +35,7 @@ Therefore, in this repository a small example is given to get Selenium working o
 - To use Selenium (even headless in a container) you need always **two** components to be installed on your machine:
   - A **webbrowser** and its associated **webdriver**.
 - The _versions_ of the webbrowser and its associated webdriver must match.
-- If your are using Selenium in a docker container or on streamlit sharing, the `--headless` option is mandatory, because there ist no graphical user interface available.
+- If your are using Selenium in a docker container or on Streamlit Cloud, the `--headless` option is mandatory, because there ist no graphical user interface available.
 - There are three options of webbrowser/webdriver combinations for Selenium:
     1. `chrome & chromedriver`
     2. `chromium & chromedriver`
@@ -44,17 +44,17 @@ Therefore, in this repository a small example is given to get Selenium working o
   - *This information is maybe outdated, because Debian Bullseye seems to be the current distribution running on Streamlit Cloud*
 - To make this repository cross-platform, the Windows 10 chromedriver is stored here in the root folder as well. Be aware, that the version of this chromedriver `ChromeDriver 89.0.4389.23` must match the version of your installed Chrome browser. The chromedriver may be outdated. `PS: This information is outdated, always download the latest chromedriver version for Windows yourself`.
 - The chromedriver has a lot of options, that can be set. It may be necessary to tweak these options on different platforms to make headless operation work smoothly.
-- The deployment to streamlit sharing has unfortunately failed sometimes in the past. A concrete cause of the error or an informative error message could not be identified. Currently it seems to be stable during deplyoment.
+- The deployment to Streamlit Cloud has unfortunately failed sometimes in the past. A concrete cause of the error or an informative error message could not be identified. Currently it seems to be stable during deplyoment.
 
 ---
 
 ## Development Setup
 
-In the streamlit sharing runtime, neither chrome, chromedriver nor geckodriver are available in the default apt package sources.
+In the Streamlit Cloud runtime, neither chrome, chromedriver nor geckodriver are available in the default apt package sources.
 
-The streamlit sharing runtime seems to be very similar to the official docker image `python:3.X-slim` on Docker Hub, which is based on Debian Buster.
+The Streamlit Cloud runtime seems to be very similar to the official docker image `python:3.X-slim` on Docker Hub, which is based on Debian Buster.
 
-In this repository a `Dockerfile` is provided that mimics the streamlit sharing runtime. It can be used for local testing.
+In this repository a `Dockerfile` is provided that mimics the Streamlit Cloud runtime. It can be used for local testing.
 
 A `packages.txt` is provided with the following minimal content:
 
@@ -76,14 +76,14 @@ streamlit
 
 ### Docker Hub
 
-Docker Images that come close to the actual streamlit sharing runtime:
+Docker Images that come close to the actual Streamlit Cloud runtime:
 
 - <https://github.com/amineHY/docker-streamlit-app>
 - <https://github.com/russelljjarvis/docker-streamlit-app>
 
 ### Docker Container local
 
-The provided `Dockerfile` tries to mimic the Streamlit Sharing runtime.
+The provided `Dockerfile` tries to mimic the Streamlit Cloud runtime.
 
 Pulling the base image from Docker Hub
 
