@@ -12,6 +12,7 @@ Streamlit project to test Selenium running in Streamlit Cloud runtime.
 - [x] update information regarding Debian Bullseye packages
 - [ ] improve example
 - [ ] try also `undetected_chromedriver` package
+- [ ] try also `SeleniumBase` package
 
 ## Problem
 
