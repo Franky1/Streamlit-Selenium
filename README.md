@@ -9,8 +9,9 @@ Streamlit project to test Selenium running in Streamlit Cloud runtime.
 ## ToDo
 
 - [x] cleanup repo
+- [x] update information regarding Debian Bullseye packages
 - [ ] improve example
-- [ ] update information regarding Debian Bullseye
+- [ ] try also `undetected_chromedriver` package
 
 ## Problem
 
@@ -40,9 +41,8 @@ Therefore, in this repository a small example is given to get Selenium working o
     1. `chrome & chromedriver`
     2. `chromium & chromedriver`
     3. `firefox & geckodriver`
-- Unfortunately in the default Debian Buster apt package repositories, not all of these packages are available. If we want an installation from the default repositories, only `chromium & chromedriver` is left.
-  - *This information is maybe outdated, because Debian Bullseye seems to be the current distribution running on Streamlit Cloud*
-- To make this repository cross-platform, the Windows 10 chromedriver is stored here in the root folder as well. Be aware, that the version of this chromedriver `ChromeDriver 89.0.4389.23` must match the version of your installed Chrome browser. The chromedriver may be outdated. `PS: This information is outdated, always download the latest chromedriver version for Windows yourself`.
+- Unfortunately in the default Debian Bullseye apt package repositories, not all of these packages are available. If we want an installation from the default repositories, only `chromium & chromedriver` is left.
+- To make this repository cross-platform, the Windows 10 chromedriver must be stored here in the root folder or add to the PATH. Be aware, that the version of this chromedriver must match the version of your installed Chrome browser.
 - The chromedriver has a lot of options, that can be set. It may be necessary to tweak these options on different platforms to make headless operation work smoothly.
 - The deployment to Streamlit Cloud has unfortunately failed sometimes in the past. A concrete cause of the error or an informative error message could not be identified. Currently it seems to be stable during deplyoment.
 
@@ -54,7 +54,7 @@ In the Streamlit Cloud runtime, neither chrome, chromedriver nor geckodriver are
 
 The Streamlit Cloud runtime seems to be very similar to the official docker image `python:3.X-slim` on Docker Hub, which is based on Debian Buster.
 
-In this repository a `Dockerfile` is provided that mimics the Streamlit Cloud runtime. It can be used for local testing.
+In this repository a [Dockerfile](Dockerfile) is provided that mimics the Streamlit Cloud runtime. It can be used for local testing.
 
 A `packages.txt` is provided with the following minimal content:
 
@@ -66,8 +66,8 @@ chromium-driver
 A `requirements.txt` is provided with the following minimal content:
 
 ```txt
-selenium==4.2.0
 streamlit
+selenium
 ```
 
 ---
@@ -83,45 +83,23 @@ Docker Images that come close to the actual Streamlit Cloud runtime:
 
 ### Docker Container local
 
-The provided `Dockerfile` tries to mimic the Streamlit Cloud runtime.
-
-Pulling the base image from Docker Hub
-
-```shell
-docker pull python:3.9-slim
-```
-
-Run and shell into base Python container
-
-```shell
-docker run -it --name py39slim python:3.9-slim /bin/bash
-docker run -ti --rm python:3.9-slim /bin/bash
-```
+The provided [Dockerfile](Dockerfile) tries to mimic the Streamlit Cloud runtime.
 
 Build local custom Docker Image from Dockerfile
 
 ```shell
 docker build --progress=plain --tag selenium:latest .
-docker run -ti --name selenium --rm selenium:latest /bin/bash
 ```
 
 Run custom Docker Container
 
 ```shell
-docker run -ti -p 8501:8501 --rm selenium:latest /bin/bash
 docker run -ti -p 8501:8501 --rm selenium:latest
+docker run -ti -p 8501:8501 --rm selenium:latest /bin/bash
 docker run -ti -p 8501:8501 -v $(pwd):/app --rm selenium:latest  # linux
 docker run -ti -p 8501:8501 -v ${pwd}:/app --rm selenium:latest  # powershell
 docker run -ti -p 8501:8501 -v %cd%:/app --rm selenium:latest  # cmd.exe
 ```
-
-### Streamlit URL
-
-Open the local Streamlit application:
-
-<http://localhost:8501>
-
-for local Windows or local Docker application.
 
 ---
 
@@ -133,7 +111,7 @@ for local Windows or local Docker application.
 pip install selenium
 ```
 
-## Chromium
+### Chromium
 
 Required packages to install
 
@@ -148,39 +126,39 @@ apt install chromium-driver
 
 ---
 
-### Webdriver Manager for Python
+## undetected_chromedriver
 
-- <https://github.com/SergeyPirogov/webdriver_manager>
-- <https://pypi.org/project/webdriver-manager/>
+> Another option to try
+
+- <https://github.com/ultrafunkamsterdam/undetected-chromedriver>
+- _Resources_
+  - <https://datawookie.dev/blog/2022/10/undetected-chromedriver/>
+  - <https://stackoverflow.com/questions/74469556/undetected-chromedriver-with-proxy>
+  - <https://stackoverflow.com/questions/72919814/undetected-chromedriver-is-not-bypassing-in-headless-mode>
+  - <https://stackoverflow.com/questions/73838436/why-cant-i-connect-to-chrome-when-using-the-undetected-chromedriver>
+  - <https://stackoverflow.com/questions/74793705/how-to-load-chrome-options-using-undetected-chrome>
+  - <https://www.youtube.com/watch?v=6SDzRN1aHiI>
+
+---
+
+## Selenium Base
+
+> Another option to try
+
+- <https://github.com/seleniumbase/SeleniumBase>
+- _Resources_
+  - <https://stackoverflow.com/questions/73999362/undetected-chromedriver-runs-slowly-suggestions>
+
+---
+
+### Webdriver Manager for Python
 
 > Another option to try to install the right webdriver? But this may not work on Streamlit Cloud.
 
-```shell
-pip install webdriver-manager
-```
-
-```python
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.utils import ChromeType
-
-driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install())
-```
-
-### Geckodriver
-
-<https://pypi.org/project/geckodriver-autoinstaller/>
-
-### selenium_driver_updater
-
-<https://github.com/Svinokur/selenium_driver_updater>
-
-### chromedriver-binary-auto
-
-<https://github.com/danielkaiser/python-chromedriver-binary>
+- <https://github.com/SergeyPirogov/webdriver_manager>
 
 ---
 
 ## Status
 
-> Last changes: 18.12.2022
+> Last changed: 2023-02-20

@@ -29,7 +29,7 @@ EXPOSE 8501
 
 COPY . .
 
-CMD ["streamlit", "run", "app.py"]
+CMD ["streamlit", "run", "streamlit_app.py"]
 
 # docker build --progress=plain --tag selenium:latest .
 # docker run -ti -p 8501:8501 --rm selenium:latest /bin/bash
