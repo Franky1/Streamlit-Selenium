@@ -1,4 +1,2 @@
 streamlit
 selenium
-undetected-chromedriver
-seleniumbase
