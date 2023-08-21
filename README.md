@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD026 -->
 # Streamlit Selenium Test
 
 Streamlit project to test Selenium running in Streamlit Cloud runtime.
@@ -6,15 +7,20 @@ Streamlit project to test Selenium running in Streamlit Cloud runtime.
 - [x] **Local Docker** container works
 - [x] **Streamlit Cloud** runtime works, see example app here: [![Docker](https://img.shields.io/badge/Go%20To-Streamlit%20Cloud-red?logo=streamlit)](https://app-selenium-aveswamhnppvskojbrkzia.streamlit.app/)
 
-## ToDo
+## Issues :bug:
+
+- `2023-08-21` : Currently the streamlit demo app does not work, probably due to changes in selenium, needs to be fixed.
+
+## ToDo :ballot_box_with_check:
 
 - [x] cleanup repo
 - [x] update information regarding Debian Bullseye packages
+- [ ] fix streamlit demo app
 - [ ] improve example
 - [ ] try also `undetected_chromedriver` package
 - [ ] try also `seleniumbase` package
 
-## Problem
+## Problem :thinking:
 
 The suggestion for this repo came from a post on the Streamlit Community Forum.
 
@@ -32,7 +38,7 @@ Therefore, in this repository a small example is given to get Selenium working o
 
 ---
 
-## Pitfalls
+## Pitfalls :triangular_flag_on_post:
 
 - To use Selenium (even headless in a container) you need always **two** components to be installed on your machine:
   - A **webbrowser** and its associated **webdriver**.
@@ -49,7 +55,7 @@ Therefore, in this repository a small example is given to get Selenium working o
 
 ---
 
-## Development Setup
+## Development Setup :hammer_and_wrench:
 
 In the Streamlit Cloud runtime, neither chrome, chromedriver nor geckodriver are available in the default apt package sources.
 
@@ -73,7 +79,7 @@ selenium
 
 ---
 
-## Docker
+## Docker :whale2:
 
 ### Docker Hub
 
@@ -160,6 +166,6 @@ apt install chromium-driver
 
 ---
 
-## Status
+## Status :heavy_check_mark:
 
-> Last changed: 2023-02-20
+> Last changed: 2023-08-21
