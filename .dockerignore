@@ -40,3 +40,5 @@ Packages.md
 .gitattributes
 .streamlit/secrets.toml
 scratchpad/
+.flake8
+.sourcery.yaml

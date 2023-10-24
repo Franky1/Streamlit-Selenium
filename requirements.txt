@@ -1,2 +1,2 @@
 streamlit
-selenium==4.9.1  # because service_log_path has been deprecated in 4.10.0
+selenium

@@ -9,13 +9,10 @@ Streamlit project to test Selenium running in Streamlit Cloud runtime.
 
 ## Issues :bug:
 
-- `2023-08-21` : Currently the streamlit demo app does not work, probably due to changes in selenium, needs to be fixed.
+- *None*
 
 ## ToDo :ballot_box_with_check:
 
-- [x] cleanup repo
-- [x] update information regarding Debian Bullseye packages
-- [ ] fix streamlit demo app
 - [ ] improve example
 - [ ] try also `undetected_chromedriver` package
 - [ ] try also `seleniumbase` package
@@ -42,8 +39,8 @@ Therefore, in this repository a small example is given to get Selenium working o
 
 - To use Selenium (even headless in a container) you need always **two** components to be installed on your machine:
   - A **webbrowser** and its associated **webdriver**.
-- The _versions_ of the webbrowser and its associated webdriver must match.
-- If your are using Selenium in a docker container or on Streamlit Cloud, the `--headless` option is mandatory, because there ist no graphical user interface available.
+- The *version* of the headless webbrowser and its associated webdriver must match.
+- If your are using Selenium in a docker container or on Streamlit Cloud, the `--headless` option is mandatory, because there is no graphical user interface available.
 - There are three options of webbrowser/webdriver combinations for Selenium:
     1. `chrome & chromedriver`
     2. `chromium & chromedriver`
@@ -59,7 +56,7 @@ Therefore, in this repository a small example is given to get Selenium working o
 
 In the Streamlit Cloud runtime, neither chrome, chromedriver nor geckodriver are available in the default apt package sources.
 
-The Streamlit Cloud runtime seems to be very similar to the official docker image `python:3.X-slim` on Docker Hub, which is based on Debian Buster.
+The Streamlit Cloud runtime seems to be very similar to the official docker image `python:3.XX-slim` on Docker Hub, which is based on Debian Bookworm.
 
 In this repository a [Dockerfile](Dockerfile) is provided that mimics the Streamlit Cloud runtime. It can be used for local testing.
 
@@ -138,7 +135,7 @@ apt install chromium-driver
 > Another option to try
 
 - <https://github.com/ultrafunkamsterdam/undetected-chromedriver>
-- _Resources_
+- *Resources*
   - <https://datawookie.dev/blog/2022/10/undetected-chromedriver/>
   - <https://stackoverflow.com/questions/74469556/undetected-chromedriver-with-proxy>
   - <https://stackoverflow.com/questions/72919814/undetected-chromedriver-is-not-bypassing-in-headless-mode>
@@ -148,24 +145,6 @@ apt install chromium-driver
 
 ---
 
-## Selenium Base
-
-> Another option to try
-
-- <https://github.com/seleniumbase/SeleniumBase>
-- _Resources_
-  - <https://stackoverflow.com/questions/73999362/undetected-chromedriver-runs-slowly-suggestions>
-
----
-
-### Webdriver Manager for Python
-
-> Another option to try to install the right webdriver? But this may not work on Streamlit Cloud.
-
-- <https://github.com/SergeyPirogov/webdriver_manager>
-
----
-
 ## Status :heavy_check_mark:
 
-> Last changed: 2023-08-21
+> Last changed: 2023-10-24

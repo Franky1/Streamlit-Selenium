@@ -1,4 +1,4 @@
-FROM python:3.9-slim
+FROM python:3.10-slim
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -8,12 +8,14 @@ ENV PYTHONUNBUFFERED=1 \
     LC_ALL=C.UTF-8 \
     LANG=C.UTF-8
 
-# we probably need build tools?
+# we need some build tools for installing additional python pip packages
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends \
     gcc \
     g++ \
     build-essential \
+    software-properties-common \
+    git \
     python3-dev
 
 WORKDIR /app
