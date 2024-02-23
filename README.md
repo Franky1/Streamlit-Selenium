@@ -33,8 +33,6 @@ Therefore, in this repository a small example is given to get Selenium working o
 - **Local Docker** container that mimics the Streamlit Cloud runtime
 - **Streamlit Community Cloud** runtime
 
----
-
 ## Pitfalls :triangular_flag_on_post:
 
 - To use Selenium (even headless in a container) you need always **two** components to be installed on your machine:
@@ -49,8 +47,6 @@ Therefore, in this repository a small example is given to get Selenium working o
 - To make this repository cross-platform, the Windows 10 chromedriver must be stored here in the root folder or add to the PATH. Be aware, that the version of this chromedriver must match the version of your installed Chrome browser.
 - The chromedriver has a lot of options, that can be set. It may be necessary to tweak these options on different platforms to make headless operation work smoothly.
 - The deployment to Streamlit Cloud has unfortunately failed sometimes in the past. A concrete cause of the error or an informative error message could not be identified. Currently it seems to be stable during deployment.
-
----
 
 ## Development Setup :hammer_and_wrench:
 
@@ -73,8 +69,6 @@ A `requirements.txt` is provided with the following minimal content:
 streamlit
 selenium
 ```
-
----
 
 ## Docker :whale2:
 
@@ -105,9 +99,7 @@ docker run -ti -p 8501:8501 -v ${pwd}:/app --rm selenium:latest  # powershell
 docker run -ti -p 8501:8501 -v %cd%:/app --rm selenium:latest  # cmd.exe
 ```
 
----
-
-## Selenium
+## Selenium :eye:
 
 <https://selenium-python.readthedocs.io/getting-started.html>
 
@@ -115,7 +107,7 @@ docker run -ti -p 8501:8501 -v %cd%:/app --rm selenium:latest  # cmd.exe
 pip install selenium
 ```
 
-### Chromium
+### Chromium :web:
 
 Required packages to install
 
@@ -128,11 +120,9 @@ apt install chromium-driver
 
 <https://peter.sh/experiments/chromium-command-line-switches/>
 
----
+## undetected_chromedriver :man_shrugging:
 
-## undetected_chromedriver
-
-> Another option to try
+> Another option to try, not yet done...
 
 - <https://github.com/ultrafunkamsterdam/undetected-chromedriver>
 - *Resources*
@@ -142,8 +132,6 @@ apt install chromium-driver
   - <https://stackoverflow.com/questions/73838436/why-cant-i-connect-to-chrome-when-using-the-undetected-chromedriver>
   - <https://stackoverflow.com/questions/74793705/how-to-load-chrome-options-using-undetected-chrome>
   - <https://www.youtube.com/watch?v=6SDzRN1aHiI>
-
----
 
 ## Status :heavy_check_mark:
 
