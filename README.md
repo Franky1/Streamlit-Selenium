@@ -96,7 +96,7 @@ docker run -ti -p 8501:8501 --rm selenium:latest
 docker run -ti -p 8501:8501 --rm selenium:latest /bin/bash
 docker run -ti -p 8501:8501 -v $(pwd):/app --rm selenium:latest  # linux
 docker run -ti -p 8501:8501 -v ${pwd}:/app --rm selenium:latest  # powershell
-docker run -ti -p 8501:8501 -v %cd%:/app --rm selenium:latest  # cmd.exe
+docker run -ti -p 8501:8501 -v %cd%:/app --rm selenium:latest    # cmd.exe
 ```
 
 ## Selenium :eye:
@@ -107,7 +107,7 @@ docker run -ti -p 8501:8501 -v %cd%:/app --rm selenium:latest  # cmd.exe
 pip install selenium
 ```
 
-### Chromium :web:
+### Chromium :spider_web:
 
 Required packages to install
 
