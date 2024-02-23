@@ -31,7 +31,7 @@ Therefore, in this repository a small example is given to get Selenium working o
 
 - **Local Windows 10** machine
 - **Local Docker** container that mimics the Streamlit Cloud runtime
-- **Streamlit Cloud** runtime
+- **Streamlit Community Cloud** runtime
 
 ---
 
@@ -39,7 +39,7 @@ Therefore, in this repository a small example is given to get Selenium working o
 
 - To use Selenium (even headless in a container) you need always **two** components to be installed on your machine:
   - A **webbrowser** and its associated **webdriver**.
-- The *version* of the headless webbrowser and its associated webdriver must match.
+- The **version** of the headless webbrowser and its associated webdriver must always **match**.
 - If your are using Selenium in a docker container or on Streamlit Cloud, the `--headless` option is mandatory, because there is no graphical user interface available.
 - There are three options of webbrowser/webdriver combinations for Selenium:
     1. `chrome & chromedriver`
@@ -48,7 +48,7 @@ Therefore, in this repository a small example is given to get Selenium working o
 - Unfortunately in the default Debian Bullseye apt package repositories, not all of these packages are available. If we want an installation from the default repositories, only `chromium & chromedriver` is left.
 - To make this repository cross-platform, the Windows 10 chromedriver must be stored here in the root folder or add to the PATH. Be aware, that the version of this chromedriver must match the version of your installed Chrome browser.
 - The chromedriver has a lot of options, that can be set. It may be necessary to tweak these options on different platforms to make headless operation work smoothly.
-- The deployment to Streamlit Cloud has unfortunately failed sometimes in the past. A concrete cause of the error or an informative error message could not be identified. Currently it seems to be stable during deplyoment.
+- The deployment to Streamlit Cloud has unfortunately failed sometimes in the past. A concrete cause of the error or an informative error message could not be identified. Currently it seems to be stable during deployment.
 
 ---
 
