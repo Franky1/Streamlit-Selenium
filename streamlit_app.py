@@ -128,11 +128,11 @@ if __name__ == "__main__":
 
     st.balloons()
     if st.button('Start Selenium run'):
-        st.warning('Selenium is running, please wait...')
+        st.warning('Selenium is running, please wait...', icon='⏳')
         result = run_selenium(logpath=logpath)
         if result is None:
             st.error('There was an error, no result found!', icon='🔥')
         else:
             st.info(f'Result -> {result}')
-        st.info('Selenium log file is shown below...')
+        st.info('Selenium log file is shown below...', icon='⬇️')
         show_selenium_log(logpath=logpath)
