@@ -96,7 +96,7 @@ def run_selenium(logpath):
             element = WebDriverWait(driver, 10).until(lambda x: x.find_elements(by=By.XPATH, value=xpath))
             name = element[0].get_property('attributes')[0]['name']
         except Exception as e:
-            st.error(body='Selenium Exception occured!', icon=':warning:')
+            st.error(body='Selenium Exception occured!', icon='🔥')
             st.write(str(e))
     return name
 
@@ -104,9 +104,9 @@ def run_selenium(logpath):
 if __name__ == "__main__":
     logpath=get_logpath()
     delete_selenium_log(logpath=logpath)
-    st.set_page_config(page_title="Selenium Test", page_icon='✅',
+    st.set_page_config(page_title="Selenium Test", page_icon='🕸️',
         initial_sidebar_state='collapsed')
-    st.title('🔨 Selenium on Streamlit Cloud')
+    st.title('Selenium on Streamlit Cloud 🕸️')
     st.markdown('''This app is only a very simple test for **Selenium** running on **Streamlit Cloud** runtime.<br>
         The suggestion for this demo app came from a post on the Streamlit Community Forum.<br>
         <https://discuss.streamlit.io/t/issue-with-selenium-on-a-streamlit-app/11563><br><br>
