@@ -97,7 +97,7 @@ def run_selenium(logpath):
             name = element[0].get_property('attributes')[0]['name']
         except Exception as e:
             st.error(body='Selenium Exception occured!', icon='🔥')
-            st.write(str(e))
+            st.markdown(str(e))
     return name
 
 
@@ -131,7 +131,7 @@ if __name__ == "__main__":
         st.warning('Selenium is running, please wait...')
         result = run_selenium(logpath=logpath)
         if result is None:
-            st.error('There was an error, no result found!')
+            st.error('There was an error, no result found!', icon='🔥')
         else:
             st.info(f'Result -> {result}')
         st.info('Selenium log file is shown below...')
