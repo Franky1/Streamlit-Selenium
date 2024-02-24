@@ -96,7 +96,8 @@ def run_selenium(logpath):
             element = WebDriverWait(driver, 10).until(lambda x: x.find_elements(by=By.XPATH, value=xpath))
             name = element[0].get_property('attributes')[0]['name']
         except Exception as e:
-            st.error(f'Error: {e}')
+            st.error(body='Selenium Exception occured!', icon=':warning:')
+            st.write(str(e))
     return name
 
 
