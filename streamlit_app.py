@@ -97,7 +97,7 @@ def run_selenium(logpath):
             name = element[0].get_property('attributes')[0]['name']
         except Exception as e:
             st.error(body='Selenium Exception occured!', icon='🔥')
-            st.markdown(repr(e))
+            st.text(f'{str(e)}\n' f'{repr(e)}')
     return name
 
 
