@@ -9,7 +9,7 @@ Streamlit project to test Selenium running in Streamlit Cloud runtime.
 
 ## Issues :bug:
 
-- `2024-02-24` Example fails on Streamlit Cloud with a TimeoutException, but works locally. Probably ip blocking on the target website. :thinking:
+- `2024-02-24` Example fails on Streamlit Cloud with a TimeoutException, but works locally. Probably geoip or ip blocking on the target website. :thinking:
 
 ## ToDo :ballot_box_with_check:
 
