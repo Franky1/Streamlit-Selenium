@@ -1,3 +1,6 @@
+pandas
 streamlit
 selenium
+requests
 lxml
+countryflag

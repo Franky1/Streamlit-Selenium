@@ -26,7 +26,12 @@ share/python-wheels/
 *.egg
 MANIFEST
 
-binaries/
+# Environments
+.env
+.venv
+env/
+venv/
+
 .vscode/
 *.exe
 *.md
@@ -34,11 +39,11 @@ binaries/
 *.gz
 *.log
 LICENSE
-Packages.md
+Makefile
 .git/
 .gitignore
 .gitattributes
 .streamlit/secrets.toml
-scratchpad/
 .flake8
-.sourcery.yaml
+.pylintrc
+scratchpad/

@@ -9,7 +9,8 @@ Streamlit project to test Selenium running in Streamlit Cloud runtime.
 
 ## Issues :bug:
 
-- `2024-02-24` Example fails on Streamlit Cloud with a TimeoutException, but works locally. Probably geoip or ip blocking on the target website. :thinking:
+- Example fails on Streamlit Cloud with a `TimeoutException`, due to a `403` response, because geoip blocking is active on the target website. Therefore a **proxy** can be enabled optionally to bypass this.
+- However, the proxies are not very reliable, because only free proxies are used here. Therefore, the example is not very stable with enabled proxies and can fail sometimes.
 
 ## ToDo :ballot_box_with_check:
 
@@ -33,6 +34,10 @@ Therefore, in this repository a small example is given to get Selenium working o
 - **Local Docker** container that mimics the Streamlit Cloud runtime
 - **Streamlit Community Cloud** runtime
 
+## Proxy :sunglasses:
+
+Because some websites block requests based on countries (aka geoip blocking) or from certain IP ranges, a proxy can be used to bypass this. The example app has a checkbox to enable a proxy. The proxy is a free socks5 proxy from a public list and is not very reliable. Therefore, the example is not very stable with enabled proxies and can fail sometimes.
+
 ## Pitfalls :triangular_flag_on_post:
 
 - To use Selenium (even headless in a container) you need always **two** components to be installed on your machine:
@@ -52,7 +57,7 @@ Therefore, in this repository a small example is given to get Selenium working o
 
 In the Streamlit Cloud runtime, neither chrome, chromedriver nor geckodriver are available in the default apt package sources.
 
-The Streamlit Cloud runtime seems to be very similar to the official docker image `python:3.XX-slim` on Docker Hub, which is based on Debian Bookworm.
+The Streamlit Cloud runtime seems to be very similar to the official docker image `python:3.XX-slim-bullseye` on Docker Hub, which is based on Debian Bullseye.
 
 In this repository a [Dockerfile](Dockerfile) is provided that mimics the Streamlit Cloud runtime. It can be used for local testing.
 
@@ -135,4 +140,4 @@ apt install chromium-driver
 
 ## Status :heavy_check_mark:
 
-> Last changed: 2023-10-24
+> Last changed: 2023-10-25
