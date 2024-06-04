@@ -9,8 +9,8 @@ Streamlit project to test Selenium running in Streamlit Cloud runtime.
 
 ## Issues :bug:
 
-- Example fails on Streamlit Cloud with a `TimeoutException`, due to a `403` response, because geoip blocking is active on the target website. Therefore a **proxy** can be enabled optionally to bypass this.
-- However, the proxies are not very reliable, because only free proxies are used here. Therefore, the example is not very stable with enabled proxies and can fail sometimes.
+- Example fails on Streamlit Cloud with a `TimeoutException`, due to a `403` response, because **GeoIP blocking** is active on the target website. Therefore a **proxy** can be enabled optionally to bypass this.
+- However, the proxies are not very reliable, because only free proxies are used here. Therefore, the example is not very stable with enabled proxies and can fail sometimes. Sometimes, no proxies are available.
 
 ## ToDo :ballot_box_with_check:
 
@@ -25,8 +25,8 @@ The suggestion for this repo came from a post on the Streamlit Community Forum.
 <https://discuss.streamlit.io/t/issue-with-selenium-on-a-streamlit-app/11563>
 
 It is not that easy to install and use Selenium based webscraper in container based environments.
-On the local computer, this usually works much more smoothly because a browser is already installed here and can be controlled by the associated webdriver.
-In container-based environments, however, headless operation is mandatory because no UI can be used there.
+On the local computer, this usually works much more smoothly because a browser is already installed and can be controlled by the associated webdriver.
+In container-based environments, however, **headless** operation is **mandatory** because no UI can be used there.
 
 Therefore, in this repository a small example is given to get Selenium working on:
 
@@ -49,9 +49,10 @@ Because some websites block requests based on countries (aka geoip blocking) or 
     2. `chromium & chromedriver`
     3. `firefox & geckodriver`
 - Unfortunately in the default Debian Bullseye apt package repositories, not all of these packages are available. If we want an installation from the default repositories, only `chromium & chromedriver` is left.
-- The chromedriver has a lot of options, that can be set. It may be necessary to tweak these options on different platforms to make headless operation work smoothly.
-- The deployment to Streamlit Cloud has unfortunately failed sometimes in the past. A concrete cause of the error or an informative error message could not be identified. Currently it seems to be stable during deployment.
-- To run this streamlit app on **Windows**, the Windows `chromedriver.exe` must be stored here in the root folder or add to the Windows PATH. Be aware, that the version of this chromedriver must match the version of your installed Chrome browser.
+- The chromedriver has a lot of options, that can be set. It may be necessary to tweak these options on different platforms to make headless operation work.
+- The chromedriver and its options can change over time.
+- The deployment to Streamlit Cloud has unfortunately failed sometimes in the past. A concrete cause of the error or an informative error message could not be identified. Currently it seems to be stable on Streamlit Cloud.
+- To run this streamlit app on **Windows**, the Windows `chromedriver.exe` must be stored here in the root folder or added to the Windows PATH. Be aware, that the version of this chromedriver must match the version of your installed Chrome browser.
 
 ## Development Setup :hammer_and_wrench:
 
