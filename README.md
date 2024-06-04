@@ -49,9 +49,9 @@ Because some websites block requests based on countries (aka geoip blocking) or 
     2. `chromium & chromedriver`
     3. `firefox & geckodriver`
 - Unfortunately in the default Debian Bullseye apt package repositories, not all of these packages are available. If we want an installation from the default repositories, only `chromium & chromedriver` is left.
-- To make this repository cross-platform, the Windows 10 chromedriver must be stored here in the root folder or add to the PATH. Be aware, that the version of this chromedriver must match the version of your installed Chrome browser.
 - The chromedriver has a lot of options, that can be set. It may be necessary to tweak these options on different platforms to make headless operation work smoothly.
 - The deployment to Streamlit Cloud has unfortunately failed sometimes in the past. A concrete cause of the error or an informative error message could not be identified. Currently it seems to be stable during deployment.
+- To run this streamlit app on **Windows**, the Windows `chromedriver.exe` must be stored here in the root folder or add to the Windows PATH. Be aware, that the version of this chromedriver must match the version of your installed Chrome browser.
 
 ## Development Setup :hammer_and_wrench:
 
@@ -76,13 +76,6 @@ selenium
 ```
 
 ## Docker :whale2:
-
-### Docker Hub
-
-Docker Images that come close to the actual Streamlit Cloud runtime:
-
-- <https://github.com/amineHY/docker-streamlit-app>
-- <https://github.com/russelljjarvis/docker-streamlit-app>
 
 ### Docker Container local
 
