@@ -27,14 +27,16 @@ endif
 all: cleanpy update venv
 	@echo
 	@echo "******************* all FINISHED *******************"
+	@echo
 
 # local update of pip/virtualenv
 update:
 	@echo "+++++++++++++++++++ update START +++++++++++++++++++"
 	@echo
-	python -m pip install --upgrade pip setuptools poetry virtualenv
+	python -m pip install --upgrade pip setuptools wheel poetry virtualenv uv ruff
 	@echo
 	@echo "******************* update FINISHED *******************"
+	@echo
 
 # target for bulding the python venv
 venv:
@@ -45,22 +47,26 @@ venv:
 	which python
 	@echo
 	@echo "Make Virtual Environment..."
-	python -m venv .venv --clear --upgrade-deps
+#  python -m venv .venv --clear --upgrade-deps
+	python -m uv venv --seed
 	@echo
 	@echo "Check Virtual Environment Python Version..."
 	$(PYTHONVENVEXE) --version
 	$(PYTHONVENVEXE) -c "import sys; print(sys.executable)"
 	@echo
 	@echo "Install/Update venv dependencies..."
-	$(PYTHONVENVEXE) -m pip install --upgrade pip setuptools poetry jupyter
+# $(PYTHONVENVEXE) -m pip install --upgrade pip setuptools wheel poetry
+	uv pip install --upgrade pip setuptools wheel poetry jupyter
 	@echo
 	@echo "Install project dependencies..."
-	$(PYTHONVENVEXE) -m pip install --upgrade -r requirements.txt
+# $(PYTHONVENVEXE) -m pip install --upgrade -r requirements.txt
+	uv pip install --upgrade --requirement requirements.txt
 	@echo
 	@echo "Check for outdated dependencies and just list them..."
 	$(PYTHONVENVEXE) -m pip list --outdated
 	@echo
 	@echo "******************* virtualenv venv FINISHED *******************"
+	@echo
 
 # target for upgrading venv
 venvupdate:
@@ -71,15 +77,18 @@ venvupdate:
 	$(PYTHONVENVEXE) -c "import sys; print(sys.executable)"
 	@echo
 	@echo "Update venv dependencies..."
-	$(PYTHONVENVEXE) -m pip install --upgrade pip setuptools poetry jupyter
+# $(PYTHONVENVEXE) -m pip install --upgrade pip setuptools wheel poetry
+	uv pip install --upgrade pip setuptools wheel poetry jupyter
 	@echo
 	@echo "Update project dependencies..."
-	$(PYTHONVENVEXE) -m pip install --upgrade -r requirements.txt
+# $(PYTHONVENVEXE) -m pip install --upgrade -r requirements.txt
+	uv pip install --upgrade --requirement requirements.txt
 	@echo
 	@echo "Check for outdated dependencies and just list them..."
 	$(PYTHONVENVEXE) -m pip list --outdated
 	@echo
 	@echo "******************* venvupdate FINISHED *******************"
+	@echo
 
 # build docker image
 docker:
@@ -90,6 +99,7 @@ docker:
 	docker build --progress=plain --tag $(DOCKERTAG) .
 	@echo
 	@echo "******************* docker FINISHED *******************"
+	@echo
 
 # remove cache files
 cleanpy:
@@ -98,6 +108,7 @@ cleanpy:
 	rm -rf __pycache__
 	@echo
 	@echo "******************* cleanpy FINISHED *******************"
+	@echo
 
 # remove venv
 cleanvenv:
@@ -106,8 +117,10 @@ cleanvenv:
 	rm -rf .venv
 	@echo
 	@echo "******************* cleanvenv FINISHED *******************"
+	@echo
 
 # clean all
 cleanall: cleanpy cleanvenv
 	@echo
 	@echo "******************* cleanall FINISHED *******************"
+	@echo

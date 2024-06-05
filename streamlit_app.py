@@ -1,25 +1,25 @@
-import os
 import json
+import os
 import shutil
 import subprocess
 import time
+from typing import List, Tuple
 
 import countryflag
 import requests
 import streamlit as st
+from lxml import etree, html
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
-from lxml import etree, html
-from typing import Tuple, List
 
 PROXYSCRAPE_URL = "https://api.proxyscrape.com/v2/"
 
 
 @st.cache_data(show_spinner=False, ttl=180)
-def get_proxyscrape_list(country: str='FR') -> Tuple[bool, List|str]:
+def get_proxyscrape_list(country: str) -> Tuple[bool, List|str]:
     params = {
         'request': 'displayproxies',
         'protocol': 'socks5',
@@ -174,7 +174,7 @@ if __name__ == "__main__":
     delete_selenium_log(logpath=logpath)
     st.set_page_config(page_title="Selenium Test", page_icon='🕸️', layout="wide",
                         initial_sidebar_state='collapsed')
-    left, middle, right = st.columns([3, 8, 2])
+    left, middle, right = st.columns([2, 11, 1], gap="small")
     with middle:
         st.title('Selenium on Streamlit Cloud 🕸️')
         st.markdown('''This app is only a very simple test for **Selenium** running on **Streamlit Cloud** runtime.
@@ -187,20 +187,24 @@ if __name__ == "__main__":
             If you disable the proxy, the app will usually fail on streamlit cloud to load the page.
             ''', unsafe_allow_html=True)
         st.markdown('---')
-        middle_left, middle_middle, middle_right = st.columns([3, 1, 4], gap="small")
+        middle_left, middle_right = st.columns([9, 10], gap="medium")
         with middle_left:
             st.header('Proxy')
-            enable_proxy = st.checkbox('Enable proxy to bypass geoip blocking', value=True)
+            st.warning('Proxies are currently disabled, does not work', icon='🔥')
+            enable_proxy = st.toggle(label='Enable proxy to bypass geoip blocking', value=False, disabled=True)
             if enable_proxy:
-                selected_country = 'FR'  # because the target website is in France
-                if st.button('Refresh proxies from free Socks5 list'):
+                # select countries from a list of european countries
+                selected_country = st.selectbox(label='Select a country', options=['FR', 'DE', 'IT', 'ES', 'GB', 'NL', 'BE', 'AT', 'CH', 'PT', 'PL'])
+                selected_country_flag = get_flag(selected_country)
+                st.info(f'Selected Country: {selected_country} {selected_country_flag}', icon='🌍')
+                if st.button(label='Refresh proxies from free Socks5 list'):
                     success, st.session_state.proxies = get_proxyscrape_list(country=selected_country)
                     if success is False:
                         st.error(f"No proxies for {selected_country} found", icon='🔥')
                         st.error(st.session_state.proxies, icon='🔥')
-                if st.session_state.proxies:
-                    st.session_state.proxy = st.selectbox(label='Select a Socks5 proxy from the list', options=st.session_state.proxies, index=0)
-                    st.info(body=f'{st.session_state.proxy} {get_flag(selected_country)}', icon='😎')
+                    if st.session_state.proxies:
+                        st.session_state.proxy = st.selectbox(label='Select a Socks5 proxy from the list', options=st.session_state.proxies, index=0)
+                        st.info(body=f'{st.session_state.proxy} {get_flag(selected_country)}', icon='😎')
             else:
                 st.session_state.proxy = None
                 st.session_state.proxies = None
@@ -208,7 +212,7 @@ if __name__ == "__main__":
         with middle_right:
             st.header('Versions')
             st.text('This is only for debugging purposes.\n'
-                    'Checking versions that are installed in this environment:\n\n'
+                    'Checking versions installed in environment:\n\n'
                     f'- Python:        {get_python_version()}\n'
                     f'- Streamlit:     {st.__version__}\n'
                     f'- Selenium:      {webdriver.__version__}\n'
@@ -218,20 +222,20 @@ if __name__ == "__main__":
 
         if st.button('Start Selenium run'):
             st.info(f'Selected Proxy: {st.session_state.proxy}', icon='☢️')
-            st.warning('Selenium is running, please wait...', icon='⏳')
-            result, performance_log, browser_log, html_content = run_selenium(logpath=logpath, proxy=st.session_state.proxy)
-            if result is None:
-                st.error('There was an error, no result found!', icon='🔥')
-            else:
-                st.info(f'Result -> {result}')
-            st.info('Selenium log files are shown below...', icon='⬇️')
-            performance_log_msg = get_messages_from_log(performance_log)
-            if performance_log_msg is not None:
-                st.header('Performance Log (filtered) - only non 200/204 status codes')
-                st.code(body=json.dumps(performance_log_msg, indent=4), language='json', line_numbers=True)
-            st.header('Selenium Log')
-            show_selenium_log(logpath=logpath)
-            if result is None and html_content is not None:
-                st.header('HTML Content')
-                st.code(body=prettify_html(html_content), language='html', line_numbers=True)
-            st.balloons()
+            with st.spinner('Selenium is running, please wait...'):
+                result, performance_log, browser_log, html_content = run_selenium(logpath=logpath, proxy=st.session_state.proxy)
+                if result is None:
+                    st.error('There was an error, no result found!', icon='🔥')
+                else:
+                    st.info(f'Result -> {result}')
+                st.info('Selenium log files are shown below...', icon='⬇️')
+                performance_log_msg = get_messages_from_log(performance_log)
+                if performance_log_msg is not None:
+                    st.header('Performance Log (filtered) - only non 200/204 status codes')
+                    st.code(body=json.dumps(performance_log_msg, indent=4), language='json', line_numbers=True)
+                st.header('Selenium Log')
+                show_selenium_log(logpath=logpath)
+                if result is None and html_content is not None:
+                    st.header('HTML Content')
+                    st.code(body=prettify_html(html_content), language='html', line_numbers=True)
+                st.balloons()
