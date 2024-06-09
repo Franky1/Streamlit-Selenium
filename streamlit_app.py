@@ -6,6 +6,7 @@ import time
 from typing import List, Tuple
 
 import countryflag
+import pandas as pd
 import requests
 import streamlit as st
 from lxml import etree, html
@@ -15,23 +16,40 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
-PROXYSCRAPE_URL = "https://api.proxyscrape.com/v2/"
-
 
 @st.cache_data(show_spinner=False, ttl=180)
-def get_proxyscrape_list(country: str) -> Tuple[bool, List|str]:
+def get_proxyscrape_socks4(country: str = 'all', protocol: str = 'socks4') -> tuple:
+    PROXYSCRAPE_URL = 'https://api.proxyscrape.com/v3/free-proxy-list/get'
     params = {
         'request': 'displayproxies',
-        'protocol': 'socks5',
-        'timeout': 1000,
+        'proxy_format' : 'protocolipport',
+        'format': 'json',
+        'protocol': protocol,
+        'timeout': 2000,
         'anonymity': 'all',
         'country': country,
     }
     try:
-        response = requests.get(url=PROXYSCRAPE_URL, params=params, timeout=5)
+        response = requests.get(url=PROXYSCRAPE_URL, params=params, timeout=3)
         response.raise_for_status()
-        # convert the response to a list
-        response = response.text.strip().split('\r\n')
+        response = response.json()
+        response = pd.json_normalize(response.get('proxies')).astype(str)
+    except Exception as e:
+        return False, str(e)
+    else:
+        return True, response
+
+
+@st.cache_data(show_spinner=False, ttl=180)
+def get_mtproto_socks5() -> tuple:
+    url = "https://mtpro.xyz/api/"
+    params = {
+        'type': 'socks'
+    }
+    try:
+        response = requests.get(url, params=params)
+        response = response.json()
+        response = pd.DataFrame(response).astype(str)
     except Exception as e:
         return False, str(e)
     else:
@@ -84,7 +102,7 @@ def get_chromedriver_path() -> str:
 
 
 @st.cache_resource(show_spinner=False)
-def get_webdriver_options(proxy: str = None) -> Options:
+def get_webdriver_options(proxy: str = None, socksStr: str = None) -> Options:
     options = Options()
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
@@ -94,8 +112,8 @@ def get_webdriver_options(proxy: str = None) -> Options:
     options.add_argument("--window-size=1920x1080")
     options.add_argument("--disable-features=VizDisplayCompositor")
     options.add_argument('--ignore-certificate-errors')
-    if proxy is not None:
-        options.add_argument(f"--proxy-server=socks5://{proxy}")
+    if proxy is not None and socksStr is not None:
+        options.add_argument(f"--proxy-server={socksStr}://{proxy}")
     options.set_capability('goog:loggingPrefs', {'performance': 'ALL'})
     return options
 
@@ -142,23 +160,24 @@ def show_selenium_log(logpath: str):
         st.error('No log file found!', icon='🔥')
 
 
-def run_selenium(logpath: str, proxy: str=None) -> Tuple[str, List, List, str]:
+def run_selenium(logpath: str, proxy: str, socksStr: str) -> Tuple[str, List, List, str]:
     name = None
     html_content = None
-    with webdriver.Chrome(options=get_webdriver_options(proxy=proxy),
-                        service=get_webdriver_service(logpath=logpath)) as driver:
-        url = "https://www.unibet.fr/sport/football/europa-league/europa-league-matchs"
-        xpath = '//*[@class="ui-mainview-block eventpath-wrapper"]'
+    options = get_webdriver_options(proxy=proxy, socksStr=socksStr)
+    service = get_webdriver_service(logpath=logpath)
+    with webdriver.Chrome(options=options, service=service) as driver:
+        url = "https://www.unibet.fr/sport/football/international/matchs-amicaux"
+        xpath = '//*[@id="cps-eventsdays-list"]'
         try:
             driver.get(url)
             time.sleep(2)
-            html_content = driver.page_source
             # Wait for the element to be rendered:
-            element = WebDriverWait(driver, 10).until(lambda x: x.find_elements(by=By.XPATH, value=xpath))
+            element = WebDriverWait(driver=driver, timeout=10).until(lambda x: x.find_elements(by=By.XPATH, value=xpath))
             name = element[0].get_property('attributes')[0]['name']
+            html_content = driver.page_source
         except Exception as e:
             st.error(body='Selenium Exception occured!', icon='🔥')
-            st.text(f'{str(e)}\n' f'{repr(e)}')
+            st.error(body=str(e), icon='🔥')
         finally:
             performance_log = driver.get_log('performance')
             browser_log = driver.get_log('browser')
@@ -170,6 +189,12 @@ if __name__ == "__main__":
         st.session_state.proxy = None
     if "proxies" not in st.session_state:
         st.session_state.proxies = None
+    if "socks5" not in st.session_state:
+        st.session_state.socks5 = False
+    if "df" not in st.session_state:
+        st.session_state.df = None
+    if "countries" not in st.session_state:
+        st.session_state.countries = None
     logpath=get_logpath()
     delete_selenium_log(logpath=logpath)
     st.set_page_config(page_title="Selenium Test", page_icon='🕸️', layout="wide",
@@ -184,30 +209,73 @@ if __name__ == "__main__":
             A link is called and waited for the existence of a specific class to read a specific property.
             If there is no error message, the action was successful. Afterwards the log files are displayed.
             Since the target website has geoip blocking enabled, a proxy is required to bypass this and can be selected optionally.
+            However, the use of proxies is not guaranteed to work, as they may not working properly.
             If you disable the proxy, the app will usually fail on streamlit cloud to load the page.
             ''', unsafe_allow_html=True)
         st.markdown('---')
         middle_left, middle_right = st.columns([9, 10], gap="medium")
         with middle_left:
             st.header('Proxy')
-            st.warning('Proxies are currently disabled, does not work', icon='🔥')
-            enable_proxy = st.toggle(label='Enable proxy to bypass geoip blocking', value=False, disabled=True)
-            if enable_proxy:
-                # select countries from a list of european countries
-                selected_country = st.selectbox(label='Select a country', options=['FR', 'DE', 'IT', 'ES', 'GB', 'NL', 'BE', 'AT', 'CH', 'PT', 'PL'])
-                selected_country_flag = get_flag(selected_country)
-                st.info(f'Selected Country: {selected_country} {selected_country_flag}', icon='🌍')
-                if st.button(label='Refresh proxies from free Socks5 list'):
-                    success, st.session_state.proxies = get_proxyscrape_list(country=selected_country)
-                    if success is False:
-                        st.error(f"No proxies for {selected_country} found", icon='🔥')
-                        st.error(st.session_state.proxies, icon='🔥')
+            st.session_state.useproxy = st.toggle(label='Enable proxy to bypass geoip blocking', value=True, disabled=False)
+            if st.session_state.useproxy:
+                socks5 = st.toggle(label='Use Socks5 proxy', value=True, disabled=False)
+                if socks5 != st.session_state.socks5:
+                    st.session_state.socks5 = socks5
+                    st.session_state.proxy = None
+                    st.session_state.proxies = None
+                    st.session_state.df = None
+                if st.session_state.socks5:
+                    # try to gather and use socks5 proxies
+                    if st.button(label='Refresh proxies from free Socks5 list'):
+                        success, proxies = get_mtproto_socks5()
+                        if not success:
+                            st.error(f"No socks5 proxies found", icon='🔥')
+                            st.error(proxies, icon='🔥')
+                            st.session_state.df = None
+                        else:
+                            if not proxies.empty:
+                                countries = sorted(proxies['country'].unique().tolist())
+                                st.session_state.df = proxies.copy()
+                                st.session_state.countries = countries
+                            else:
+                                st.session_state.df = None
+                                st.session_state.countries = None
+                else:
+                    # try to gather and use socks4 proxies
+                    if st.button(label='Refresh proxies from free Socks4 list'):
+                        success, proxies = get_proxyscrape_socks4(country='all', protocol='socks4')
+                        if not success:
+                            st.error(f"No socks4 proxies found", icon='🔥')
+                            st.error(proxies, icon='🔥')
+                            st.session_state.df = None
+                        else:
+                            if not proxies.empty:
+                                countries = sorted(proxies['ip_data.countryCode'].unique().tolist())
+                                st.session_state.df = proxies.copy()
+                                st.session_state.countries = countries
+                            else:
+                                st.session_state.df = None
+                                st.session_state.countries = None
+                if st.session_state.countries is not None:
+                    # limit countries to a set of countries
+                    allowed_countries = ['FR', 'GB', 'DE', 'ES', 'CH', 'US']
+                    st.session_state.countries = [country for country in st.session_state.countries if country in allowed_countries]
+                if st.session_state.df is not None and st.session_state.countries is not None:
+                    selected_country = st.selectbox(label='Select a country', options=st.session_state.countries)
+                    selected_country_flag = get_flag(selected_country)
+                    st.info(f'Selected Country: {selected_country} {selected_country_flag}', icon='🌍')
+                    if st.session_state.socks5:
+                        selected_country_proxies = st.session_state.df[st.session_state.df['country'] == selected_country]
+                    else:
+                        selected_country_proxies = st.session_state.df[st.session_state.df['ip_data.countryCode'] == selected_country]
+                    st.session_state.proxies = set(selected_country_proxies[['ip', 'port']].apply(lambda x: f"{x.iloc[0]}:{x.iloc[1]}", axis=1).tolist())
                     if st.session_state.proxies:
-                        st.session_state.proxy = st.selectbox(label='Select a Socks5 proxy from the list', options=st.session_state.proxies, index=0)
+                        st.session_state.proxy = st.selectbox(label='Select a proxy from the list', options=st.session_state.proxies, index=0)
                         st.info(body=f'{st.session_state.proxy} {get_flag(selected_country)}', icon='😎')
             else:
                 st.session_state.proxy = None
                 st.session_state.proxies = None
+                st.session_state.df = None
                 st.info('Proxy is disabled', icon='🔒')
         with middle_right:
             st.header('Versions')
@@ -222,12 +290,17 @@ if __name__ == "__main__":
 
         if st.button('Start Selenium run'):
             st.info(f'Selected Proxy: {st.session_state.proxy}', icon='☢️')
+            if st.session_state.useproxy:
+                socksStr = 'socks5' if st.session_state.socks5 else 'socks4'
+                st.info(f'Selected Socks: {socksStr}', icon='🧦')
+            else:
+                socksStr = None
             with st.spinner('Selenium is running, please wait...'):
-                result, performance_log, browser_log, html_content = run_selenium(logpath=logpath, proxy=st.session_state.proxy)
+                result, performance_log, browser_log, html_content = run_selenium(logpath=logpath, proxy=st.session_state.proxy, socksStr=socksStr)
                 if result is None:
                     st.error('There was an error, no result found!', icon='🔥')
                 else:
-                    st.info(f'Result -> {result}')
+                    st.success(body=f'Result: {result}', icon='🎉')
                 st.info('Selenium log files are shown below...', icon='⬇️')
                 performance_log_msg = get_messages_from_log(performance_log)
                 if performance_log_msg is not None:

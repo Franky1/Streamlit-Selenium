@@ -15,6 +15,7 @@ Streamlit project to test Selenium running in Streamlit Cloud runtime.
 ## ToDo :ballot_box_with_check:
 
 - [ ] improve example
+- [ ] fix proxy issues
 - [ ] try also `undetected_chromedriver` package
 - [ ] try also `seleniumbase` package
 
@@ -36,7 +37,7 @@ Therefore, in this repository a small example is given to get Selenium working o
 
 ## Proxy :sunglasses:
 
-Because some websites block requests based on countries (aka geoip blocking) or from certain IP ranges, a proxy can be used to bypass this. The example app has a checkbox to enable a proxy. The proxy is a free socks5 proxy from a public list and is not very reliable. Therefore, the example is not very stable with enabled proxies and can fail sometimes.
+Because some websites block requests based on countries (aka geoip blocking) or from certain IP ranges, a proxy can be used to bypass this. The example app has a checkbox to enable a proxy. You can choose between socks4 and socks5 proxies. However, socks4 does not work at all. The socks5 proxy is a free socks5 proxy from a public list and is not very reliable. Therefore, the example is not very stable with enabled proxies and can fail quite often.
 
 ## Pitfalls :triangular_flag_on_post:
 
@@ -50,7 +51,7 @@ Because some websites block requests based on countries (aka geoip blocking) or 
     3. `firefox & geckodriver`
 - Unfortunately in the default Debian Bullseye apt package repositories, not all of these packages are available. If we want an installation from the default repositories, only `chromium & chromedriver` is left.
 - The chromedriver has a lot of options, that can be set. It may be necessary to tweak these options on different platforms to make headless operation work.
-- The chromedriver and its options can change over time.
+- The chromedriver, selenium and its options change quite a lot over time. A lot of information on stackoverflow regarding chromedriver/selenium is outdated.
 - The deployment to Streamlit Cloud has unfortunately failed sometimes in the past. A concrete cause of the error or an informative error message could not be identified. Currently it seems to be stable on Streamlit Cloud.
 - To run this streamlit app on **Windows**, the Windows `chromedriver.exe` must be stored here in the root folder or added to the Windows PATH. Be aware, that the version of this chromedriver must match the version of your installed Chrome browser.
 
@@ -134,4 +135,4 @@ apt install chromium-driver
 
 ## Status :heavy_check_mark:
 
-> Last changed: 2023-10-25
+> Last changed: 2024-06-09

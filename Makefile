@@ -96,7 +96,7 @@ docker:
 	@echo
 	@echo "Build docker image with TAG: $(DOCKERTAG)"
 	@echo
-	docker build --progress=plain --tag $(DOCKERTAG) .
+	docker build --pull --progress=plain --tag $(DOCKERTAG) .
 	@echo
 	@echo "******************* docker FINISHED *******************"
 	@echo
@@ -117,6 +117,16 @@ cleanvenv:
 	rm -rf .venv
 	@echo
 	@echo "******************* cleanvenv FINISHED *******************"
+	@echo
+
+# remove docker image and dangling layers
+cleandocker:
+	@echo "+++++++++++++++++++ cleandocker START +++++++++++++++++++"
+	@echo
+	docker image rm -f $(DOCKERTAG)
+	docker builder prune -a -f
+	@echo
+	@echo "******************* cleandocker FINISHED *******************"
 	@echo
 
 # clean all
