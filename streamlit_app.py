@@ -166,13 +166,12 @@ def run_selenium(logpath: str, proxy: str, socksStr: str) -> Tuple[str, List, Li
     options = get_webdriver_options(proxy=proxy, socksStr=socksStr)
     service = get_webdriver_service(logpath=logpath)
     with webdriver.Chrome(options=options, service=service) as driver:
-        url = "https://www.unibet.fr/sport/football/international/matchs-amicaux"
-        xpath = '//*[@id="cps-eventsdays-list"]'
+        url = "https://www.unibet.fr/sport/hub/euro-2024"
         try:
             driver.get(url)
             time.sleep(2)
             # Wait for the element to be rendered:
-            element = WebDriverWait(driver=driver, timeout=10).until(lambda x: x.find_elements(by=By.XPATH, value=xpath))
+            element = WebDriverWait(driver=driver, timeout=10).until(lambda x: x.find_elements(by=By.CSS_SELECTOR, value="h2.eventcard-content-name"))
             name = element[0].get_property('attributes')[0]['name']
             html_content = driver.page_source
         except Exception as e:
